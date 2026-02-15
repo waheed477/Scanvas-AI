@@ -89,7 +89,7 @@ export function IssueCard({ issue }: { issue: Issue }) {
                   <p className="text-sm text-foreground/80 leading-relaxed">
                     {issue.description}. This violation affects accessibility by preventing users from properly perceiving or interacting with the content.
                   </p>
-                  <Button variant="link" className="px-0 text-primary h-auto" asChild>
+                  <Button variant="outline" className="px-0 text-primary h-auto border-none hover:bg-transparent" asChild>
                     <a href={issue.helpUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1">
                       Learn how to fix this on Deque University <ExternalLink className="w-3 h-3" />
                     </a>
