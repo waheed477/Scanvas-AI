@@ -8,11 +8,13 @@ import { format } from "date-fns";
 import { Search, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
+import { Audit } from "@shared/schema";
 
 export default function HistoryPage() {
   const [search, setSearch] = useState("");
+  const [, setLocation] = useLocation();
   
-  const { data: audits, isLoading } = useQuery({
+  const { data: audits, isLoading } = useQuery<Audit[]>({
     queryKey: [api.audits.list.path],
   });
 
@@ -81,8 +83,8 @@ export default function HistoryPage() {
                       {format(new Date(audit.createdAt), "MMM d, yyyy")}
                     </TableCell>
                     <TableCell className="text-right">
-                      <Button variant="ghost" size="sm" asChild>
-                        <Link href={`/audit/${audit.id}`}>View Report</Link>
+                      <Button variant="ghost" size="sm" onClick={() => setLocation(`/audit/${audit.id}`)}>
+                        View Report
                       </Button>
                     </TableCell>
                   </TableRow>
@@ -103,5 +105,3 @@ export default function HistoryPage() {
   );
 }
 
-// Inline Button import since it's used as child and might be missing from local imports
-import { Button } from "@/components/ui/button";
