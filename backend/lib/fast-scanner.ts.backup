@@ -1,0 +1,134 @@
+import axios from 'axios';
+import * as axe from 'axe-core';
+import { JSDOM } from 'jsdom';
+
+export interface ScanResult {
+  violations: any[];
+  passes: any[];
+  incomplete: any[];
+  inapplicable: any[];
+  url: string;
+  timestamp: string;
+  error?: string;
+}
+
+export async function runFastScan(url: string, selectedStandards?: string[]): Promise<ScanResult> {
+  try {
+    console.log('📡 Fetching website:', url);
+    console.log('📋 Selected standards:', selectedStandards || ['wcag2aa']);
+
+    const response = await axios.get(url, {
+      timeout: 15000,
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Cache-Control': 'no-cache'
+      },
+      maxRedirects: 5,
+      validateStatus: (status) => status < 400,
+      decompress: true
+    });
+
+    const html = response.data;
+    console.log('✅ HTML fetched, size:', html.length, 'bytes');
+
+    if (!html || html.length < 100) {
+      throw new Error('Invalid HTML response - page may be blocking bots');
+    }
+
+    const dom = new JSDOM(html, {
+      url: url,
+      contentType: 'text/html',
+      includeNodeLocations: false,
+      runScripts: 'outside-only',
+      pretendToBeVisual: true,
+      resources: 'usable'
+    });
+
+    const { window } = dom;
+    const { document } = window;
+
+    if (!window || !document) {
+      throw new Error('Failed to create proper DOM environment');
+    }
+
+    console.log('🔍 Running axe-core scan...');
+
+    const standardTags = selectedStandards || ['wcag2aa'];
+    console.log('Using tags:', standardTags);
+
+    const results = await axe.default.run(document, {
+      runOnly: {
+        type: 'tag',
+        values: standardTags
+      },
+      resultTypes: ['violations', 'passes', 'incomplete', 'inapplicable'],
+      rules: {
+        'color-contrast': { enabled: true },
+        'image-alt': { enabled: true },
+        'link-name': { enabled: true },
+        'aria-roles': { enabled: true },
+        'aria-valid-attr': { enabled: true },
+        'document-title': { enabled: true },
+        'html-has-lang': { enabled: true },
+        'landmark-one-main': { enabled: true },
+        'page-has-heading-one': { enabled: true },
+        'region': { enabled: true }
+      }
+    });
+
+    console.log(`✅ Scan complete! Found ${results.violations.length} violations`);
+
+    return {
+      violations: results.violations || [],
+      passes: results.passes || [],
+      incomplete: results.incomplete || [],
+      inapplicable: results.inapplicable || [],
+      url: url,
+      timestamp: new Date().toISOString()
+    };
+
+  } catch (error: any) {
+    console.error('❌ Scan error:', error.message);
+    return {
+      violations: [],
+      passes: [],
+      incomplete: [],
+      inapplicable: [],
+      url: url,
+      timestamp: new Date().toISOString(),
+      error: error.message
+    };
+  }
+}
+
+export function calculateScore(violations: any[]): number {
+  if (!violations || violations.length === 0) return 100;
+  let score = 100;
+  violations.forEach(violation => {
+    const impact = violation.impact || 'minor';
+    const nodes = violation.nodes?.length || 1;
+    switch (impact) {
+      case 'critical': score -= 10 * nodes; break;
+      case 'serious': score -= 7 * nodes; break;
+      case 'moderate': score -= 4 * nodes; break;
+      default: score -= 2 * nodes; break;
+    }
+  });
+  return Math.max(0, Math.min(100, Math.round(score)));
+}
+
+export function createSummary(violations: any[]) {
+  const summary = { critical: 0, serious: 0, moderate: 0, minor: 0, total: violations.length };
+  violations.forEach(v => {
+    const impact = v.impact || 'minor';
+    switch (impact) {
+      case 'critical': summary.critical++; break;
+      case 'serious': summary.serious++; break;
+      case 'moderate': summary.moderate++; break;
+      default: summary.minor++; break;
+    }
+  });
+  return summary;
+}

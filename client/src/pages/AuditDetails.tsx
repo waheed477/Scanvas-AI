@@ -1,210 +1,477 @@
-import { useEffect, useState } from "react";
-import { useRoute } from "wouter";
-import { useAudit } from "@/hooks/use-audits";
-import { ScoreGauge } from "@/components/ScoreGauge";
-import { IssueCard } from "@/components/IssueCard";
+import { useQuery } from "@tanstack/react-query";
+import { useParams, useLocation } from "wouter";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
-import { AlertCircle, FileText, Download, Share2, ArrowLeft, Eye } from "lucide-react";
-import { Link } from "wouter";
+import { api } from "@shared/routes";
+import { format } from "date-fns";
+import { ArrowLeft, AlertTriangle, Loader2, Shield, Globe, Lock, ServerCrash, Menu } from "lucide-react";
 import { motion } from "framer-motion";
-import type { AuditResult, AuditSummary } from "@shared/schema";
+import { useState, useEffect } from "react";
+import { ScoreGauge } from "@/components/ScoreGauge";
+import { IssueCard } from "@/components/IssueCard";
+import { VisualPreview } from "@/components/VisualPreview";
+import { ReportExport } from "@/components/ReportExport";
+import { StandardsSelector } from "@/components/StandardsSelector";
+import LoadingBar from "@/components/LoadingBar";
+import { ExecutivePDF } from "@/components/ExecutivePDF";
+import { RemediationRoadmap } from "@/components/RemediationRoadmap";
+import { ShareReport } from "@/components/ShareReport";
+import { ManualTesting } from "@/components/ManualTesting";
+import { useMediaQuery } from "@/hooks/use-media-query";
+import { VisionScanToggle } from "@/components/VisionScanToggle";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export default function AuditDetails() {
-  const [, params] = useRoute("/audit/:id");
-  const id = parseInt(params?.id || "0");
-  const { data: audit, isLoading, error } = useAudit(id);
+  const { id } = useParams();
+  const [, setLocation] = useLocation();
+  const [activeTab, setActiveTab] = useState("issues");
+  const [selectedStandards, setSelectedStandards] = useState<string[]>(['wcag2aa']);
+  const [showLoading, setShowLoading] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [visionIssues, setVisionIssues] = useState<any[]>([]);
+  const [showVisionIssues, setShowVisionIssues] = useState(false);
+  
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  const isTablet = useMediaQuery("(min-width: 769px) and (max-width: 1024px)");
 
-  if (isLoading) {
-    return <AuditSkeleton />;
-  }
-
-  if (error || !audit) {
+  // Guard condition
+  if (!id || id === 'undefined') {
     return (
-      <div className="min-h-screen flex items-center justify-center flex-col gap-4">
-        <div className="p-4 rounded-full bg-red-100 text-red-600">
-          <AlertCircle className="w-8 h-8" />
+      <div className="min-h-screen bg-[#f8fafc] dark:bg-[#0f172a] flex items-center justify-center p-4">
+        <div className="text-center">
+          <Loader2 className="h-8 w-8 animate-spin text-[#2563eb] mx-auto mb-4" />
+          <p className="text-[#475569] dark:text-[#94a3b8]">Loading audit details...</p>
         </div>
-        <h2 className="text-2xl font-bold">Audit Not Found</h2>
-        <p className="text-muted-foreground">The requested audit could not be loaded.</p>
-        <Link href="/">
-          <Button variant="outline">Back to Home</Button>
-        </Link>
       </div>
     );
   }
 
-  // Type assertion since Zod schema for JSONB is generic
-  const results = audit.results as unknown as AuditResult;
-  const summary = audit.summary as unknown as AuditSummary;
+  const { data: audit, isLoading, error } = useQuery({
+    queryKey: ['audit', id, selectedStandards],
+    queryFn: async () => {
+      console.log('Fetching audit with ID:', id, 'Standards:', selectedStandards);
+      setShowLoading(true);
+      try {
+        const data = await api.get(`/api/audit/${id}`);
+        return data;
+      } finally {
+        setTimeout(() => setShowLoading(false), 500);
+      }
+    },
+    enabled: !!id && id !== 'undefined',
+    retry: 2,
+  });
 
-  const groupedIssues = {
-    critical: results.violations.filter(v => v.impact === 'critical'),
-    serious: results.violations.filter(v => v.impact === 'serious'),
-    moderate: results.violations.filter(v => v.impact === 'moderate'),
-    minor: results.violations.filter(v => v.impact === 'minor'),
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-[#f8fafc] dark:bg-[#0f172a] flex items-center justify-center p-4">
+        <div className="text-center">
+          <Loader2 className="h-8 w-8 animate-spin text-[#2563eb] mx-auto mb-4" />
+          <p className="text-[#475569] dark:text-[#94a3b8]">Loading audit details...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !audit) {
+    console.error('Audit fetch error:', error);
+    return (
+      <div className="min-h-screen bg-[#f8fafc] dark:bg-[#0f172a] flex items-center justify-center p-4">
+        <div className="text-center max-w-md w-full">
+          <ServerCrash className="h-16 w-16 text-red-500 mx-auto mb-4" />
+          <h2 className="text-2xl font-bold text-[#0f172a] dark:text-white mb-2">Audit not found</h2>
+          <p className="text-[#475569] dark:text-[#94a3b8] mb-4">The audit you're looking for doesn't exist or couldn't be loaded.</p>
+          <Button onClick={() => setLocation("/")} className="w-full sm:w-auto">Go Home</Button>
+        </div>
+      </div>
+    );
+  }
+
+  // Check if scan had an error
+  const scanError = audit.error;
+  const violations = audit.results?.violations || [];
+
+  // Group violations by impact
+  const criticalCount = violations.filter((v: any) => v.impact === 'critical').length;
+  const seriousCount = violations.filter((v: any) => v.impact === 'serious').length;
+  const moderateCount = violations.filter((v: any) => v.impact === 'moderate').length;
+  const minorCount = violations.filter((v: any) => v.impact === 'minor').length;
+
+  // Professional score color mapping with messages
+  const getScoreInfo = (score: number) => {
+    if (score >= 95) {
+      return {
+        color: 'text-emerald-600',
+        badge: '⭐ Excellent',
+        message: 'Near-perfect accessibility! Only minor improvements possible.'
+      };
+    }
+    if (score >= 85) {
+      return {
+        color: 'text-green-600',
+        badge: '✓ Good',
+        message: 'Good accessibility score. Address remaining issues for better compliance.'
+      };
+    }
+    if (score >= 70) {
+      return {
+        color: 'text-blue-600',
+        badge: '📊 Needs Improvement',
+        message: 'Several accessibility issues found. Prioritize critical fixes.'
+      };
+    }
+    if (score >= 50) {
+      return {
+        color: 'text-yellow-600',
+        badge: '⚠️ Poor',
+        message: 'Significant accessibility barriers detected. Immediate attention required.'
+      };
+    }
+    return {
+      color: 'text-red-600',
+      badge: '🚨 Critical',
+      message: 'Critical accessibility issues blocking user access. Fix urgently!'
+    };
   };
 
-  return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b bg-card sticky top-0 z-10">
-        <div className="container max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Link href="/">
-              <Button variant="ghost" size="icon" className="hover:bg-slate-100 dark:hover:bg-slate-800">
-                <ArrowLeft className="w-5 h-5" />
-              </Button>
-            </Link>
-            <div>
-              <h1 className="text-lg font-bold truncate max-w-[200px] sm:max-w-md">{audit.url}</h1>
-              <div className="text-xs text-muted-foreground">
-                Audited {new Date(audit.createdAt).toLocaleDateString()}
-              </div>
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm" className="hidden sm:flex gap-2">
-              <Download className="w-4 h-4" /> Export PDF
-            </Button>
-            <Button variant="outline" size="sm" className="hidden sm:flex gap-2">
-              <Share2 className="w-4 h-4" /> Share
-            </Button>
-          </div>
-        </div>
-      </header>
+  // Get error message based on type - Updated version with better error detection
+  const getErrorMessage = (error: string) => {
+    // Check for timeout errors
+    if (error.includes('Navigation timeout') || error.includes('timeout')) {
+      return {
+        title: "Scan Timeout",
+        message: "The website took too long to respond. This often happens with slow servers or heavy sites.",
+        icon: <ServerCrash className="h-12 w-12 text-amber-500" />,
+        action: "Try scanning during off-peak hours or check if the site is accessible."
+      };
+    }
+    // Check for website unreachable errors
+    if (error.includes('Could not load website') || error.includes('ERR_NAME_NOT_RESOLVED') || error.includes('ENOTFOUND')) {
+      return {
+        title: "Website Unreachable",
+        message: "We couldn't load this website. It may be down or blocking automated scans.",
+        icon: <Globe className="h-12 w-12 text-amber-500" />,
+        action: "Try opening the website manually to check if it's accessible."
+      };
+    }
+    // Check for bot protection or JavaScript-heavy sites
+    if (error.includes('window') || error.includes('document')) {
+      return {
+        title: "Website Cannot Be Scanned Automatically",
+        message: "This website uses advanced bot protection (like Cloudflare) or requires JavaScript to render.",
+        icon: <Lock className="h-12 w-12 text-amber-500" />,
+        action: "Try opening the website manually in a new tab."
+      };
+    }
+    // Default error message for other cases
+    return {
+      title: "Scan Failed",
+      message: error || "We couldn't complete the accessibility scan for this website.",
+      icon: <AlertTriangle className="h-12 w-12 text-amber-500" />,
+      action: "This could be due to temporary issues."
+    };
+  };
 
-      <main className="container max-w-7xl mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-          {/* Score Card */}
-          <Card className="col-span-1 p-8 flex flex-col items-center justify-center text-center bg-card shadow-sm border-border">
-            <ScoreGauge score={audit.score} />
-            <div className="mt-6 space-y-1">
-              <h3 className="font-semibold text-lg">Overall Accessibility Score</h3>
-              <p className="text-sm text-muted-foreground">Based on WCAG 2.1 Level AA Rules</p>
-            </div>
-          </Card>
+  const errorInfo = scanError ? getErrorMessage(scanError) : null;
 
-          {/* Summary Stats */}
-          <div className="col-span-1 lg:col-span-2 grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {[
-              { label: "Critical", count: summary.critical, color: "text-red-600 bg-red-50 border-red-100" },
-              { label: "Serious", count: summary.serious, color: "text-orange-600 bg-orange-50 border-orange-100" },
-              { label: "Moderate", count: summary.moderate, color: "text-yellow-600 bg-yellow-50 border-yellow-100" },
-              { label: "Minor", count: summary.minor, color: "text-blue-600 bg-blue-50 border-blue-100" },
-            ].map((stat) => (
-              <Card key={stat.label} className={`flex flex-col justify-between p-6 border ${stat.color.split(' ')[2]}`}>
-                <span className={`text-xs font-bold uppercase tracking-wider mb-2 ${stat.color.split(' ')[0]}`}>
-                  {stat.label}
-                </span>
-                <span className={`text-4xl font-bold ${stat.color.split(' ')[0]}`}>
-                  {stat.count}
-                </span>
-                <span className="text-xs text-muted-foreground mt-2">Issues found</span>
-              </Card>
-            ))}
-          </div>
-        </div>
-
-        {/* Content Tabs */}
-        <Tabs defaultValue="issues" className="w-full">
-          <TabsList className="w-full justify-start border-b rounded-none h-auto p-0 bg-transparent gap-8 mb-8">
-            <TabsTrigger 
-              value="issues" 
-              className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-0 py-3 text-base"
-            >
-              <FileText className="w-4 h-4 mr-2" /> All Issues ({summary.total})
-            </TabsTrigger>
-            <TabsTrigger 
-              value="preview" 
-              className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-0 py-3 text-base"
-            >
-              <Eye className="w-4 h-4 mr-2" /> Visual Preview
-            </TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="issues" className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            {Object.entries(groupedIssues).map(([severity, issues]) => {
-              if (issues.length === 0) return null;
-              
-              return (
-                <div key={severity} className="space-y-4">
-                  <h3 className="text-lg font-bold capitalize flex items-center gap-2">
-                    {severity} Priority
-                    <Badge variant="secondary" className="ml-2">{issues.length}</Badge>
-                  </h3>
-                  <div className="grid gap-4">
-                    {issues.map((issue) => (
-                      <IssueCard key={issue.id} issue={issue} />
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-            
-            {summary.total === 0 && (
-              <div className="text-center py-20 bg-muted/20 rounded-xl border border-dashed">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 text-green-600 mb-4">
-                  <CheckCircle className="w-8 h-8" />
-                </div>
-                <h3 className="text-xl font-bold text-foreground">No Issues Found!</h3>
-                <p className="text-muted-foreground mt-2">Great job! Your site passed all automated checks.</p>
-              </div>
-            )}
-          </TabsContent>
-
-          <TabsContent value="preview" className="min-h-[500px]">
-            <Card className="p-10 text-center border-dashed">
-              <div className="max-w-md mx-auto space-y-4">
-                <h3 className="text-xl font-semibold">Visual Preview Unavailable</h3>
-                <p className="text-muted-foreground">
-                  Due to browser security restrictions (X-Frame-Options), we cannot display 
-                  <span className="font-mono text-xs mx-1 bg-muted px-1 py-0.5 rounded">{audit.url}</span> 
-                  directly in this dashboard.
-                </p>
-                <Button asChild>
-                  <a href={audit.url} target="_blank" rel="noopener noreferrer">
-                    Open Website in New Tab <ExternalLink className="w-4 h-4 ml-2" />
-                  </a>
-                </Button>
-              </div>
-            </Card>
-          </TabsContent>
-        </Tabs>
-      </main>
+  // Mobile action buttons component
+  const MobileActionButtons = () => (
+    <div className="flex flex-col gap-2 w-full">
+      <ShareReport auditId={id} />
+      <StandardsSelector 
+        selectedStandards={selectedStandards}
+        onStandardsChange={setSelectedStandards}
+        disabled={scanError}
+      />
+      {!scanError && (
+        <>
+          <ExecutivePDF auditId={id} auditData={audit} />
+          <ReportExport auditId={id} auditData={audit} />
+        </>
+      )}
     </div>
   );
-}
 
-function AuditSkeleton() {
   return (
-    <div className="min-h-screen bg-background p-4 sm:p-8">
-      <div className="max-w-7xl mx-auto space-y-8">
-        <div className="flex justify-between items-center">
-          <Skeleton className="h-8 w-64" />
-          <Skeleton className="h-10 w-32" />
+    <div className="min-h-screen bg-[#f8fafc] dark:bg-[#0f172a] py-4 md:py-8 px-3 md:px-4">
+      <div className="container max-w-6xl mx-auto">
+        {/* Header with back button and responsive actions */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 md:mb-6">
+          <Button
+            variant="ghost"
+            onClick={() => setLocation("/history")}
+            className="gap-2 text-[#475569] dark:text-[#94a3b8] hover:text-[#2563eb] dark:hover:text-[#7c3aed] w-fit"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span className="text-sm md:text-base">Back to History</span>
+          </Button>
+          
+          {/* Desktop action buttons - hidden on mobile */}
+          {!isMobile && (
+            <div className="flex items-center gap-2 md:gap-3 flex-wrap">
+              <ShareReport auditId={id} />
+              <StandardsSelector 
+                selectedStandards={selectedStandards}
+                onStandardsChange={setSelectedStandards}
+                disabled={scanError}
+              />
+              {!scanError && (
+                <>
+                  <ExecutivePDF auditId={id} auditData={audit} />
+                  <ReportExport auditId={id} auditData={audit} />
+                </>
+              )}
+            </div>
+          )}
+
+          {/* Mobile menu button */}
+          {isMobile && (
+            <DropdownMenu open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="sm" className="gap-2 w-fit">
+                  <Menu className="w-4 h-4" />
+                  Actions
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-64">
+                <div className="p-2">
+                  <MobileActionButtons />
+                </div>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <Skeleton className="col-span-1 h-64 rounded-xl" />
-          <div className="col-span-2 grid grid-cols-2 gap-4">
-            <Skeleton className="h-32 rounded-xl" />
-            <Skeleton className="h-32 rounded-xl" />
-            <Skeleton className="h-32 rounded-xl" />
-            <Skeleton className="h-32 rounded-xl" />
+
+        {/* Loading Bar */}
+        {showLoading && (
+          <LoadingBar 
+            duration={2}
+            color="from-[#2563eb] to-[#7c3aed]"
+            onComplete={() => console.log('Loading complete')}
+          />
+        )}
+
+        {/* Main Content - Responsive Grid */}
+        <div className="audit-report-content">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
+            {/* Left Column - Score and Summary */}
+            <div className="space-y-4 md:space-y-6">
+              {/* Score Card */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+              >
+                <Card className="border-[#e2e8f0] dark:border-[#334155] bg-white dark:bg-[#1e293b]">
+                  <CardContent className="p-4 md:p-6 flex flex-col items-center">
+                    {scanError ? (
+                      // Show error state in score card - responsive
+                      <div className="text-center py-4">
+                        <div className="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 rounded-full bg-amber-100 dark:bg-amber-950/30 flex items-center justify-center">
+                          {errorInfo?.icon}
+                        </div>
+                        <h3 className="text-base md:text-lg font-semibold text-[#0f172a] dark:text-white mb-2">
+                          {errorInfo?.title}
+                        </h3>
+                        <p className="text-xs md:text-sm text-[#475569] dark:text-[#94a3b8] mb-4">
+                          {errorInfo?.message}
+                        </p>
+                        <div className="bg-amber-50 dark:bg-amber-950/20 p-3 md:p-4 rounded-lg text-left">
+                          <p className="text-xs md:text-sm text-amber-800 dark:text-amber-400 flex items-start gap-2">
+                            <Shield className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                            <span>{errorInfo?.action}</span>
+                          </p>
+                        </div>
+                      </div>
+                    ) : (
+                      <>
+                        <ScoreGauge score={audit.score} size={isMobile ? 120 : 160} />
+                        
+                        <div className="text-center mt-4">
+                          <p className="text-xs md:text-sm text-[#475569] dark:text-[#94a3b8]">
+                            Based on {selectedStandards.length} compliance standards
+                          </p>
+                          
+                          {/* Professional Score Message */}
+                          <div className="mt-3 p-3 bg-[#f8fafc] dark:bg-[#0f172a] rounded-lg border border-[#e2e8f0] dark:border-[#334155]">
+                            <Badge className={`mb-2 ${getScoreInfo(audit.score).color.split(' ')[0]} bg-opacity-10`}>
+                              {getScoreInfo(audit.score).badge}
+                            </Badge>
+                            <p className="text-xs md:text-sm text-[#0f172a] dark:text-white">
+                              {getScoreInfo(audit.score).message}
+                            </p>
+                          </div>
+                          
+                          {/* Standards badges */}
+                          <div className="flex flex-wrap gap-1 justify-center mt-2">
+                            {selectedStandards.map(standard => (
+                              <Badge key={standard} variant="outline" className="text-[10px] md:text-xs bg-[#f1f5f9] dark:bg-[#0f172a] text-[#475569] dark:text-[#94a3b8]">
+                                {standard.replace('wcag2', 'WCAG ').replace('aa', 'AA').replace('aaa', 'AAA').toUpperCase()}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Stats grid - responsive */}
+                        <div className="w-full grid grid-cols-2 gap-2 md:gap-3 mt-4 md:mt-6">
+                          <div className="p-2 md:p-3 bg-red-50 dark:bg-red-950/20 rounded-lg text-center">
+                            <p className="text-[10px] md:text-xs text-red-600 dark:text-red-400">CRITICAL</p>
+                            <p className="text-base md:text-xl font-bold text-red-700 dark:text-red-300">{criticalCount}</p>
+                          </div>
+                          <div className="p-2 md:p-3 bg-orange-50 dark:bg-orange-950/20 rounded-lg text-center">
+                            <p className="text-[10px] md:text-xs text-orange-600 dark:text-orange-400">SERIOUS</p>
+                            <p className="text-base md:text-xl font-bold text-orange-700 dark:text-orange-300">{seriousCount}</p>
+                          </div>
+                          <div className="p-2 md:p-3 bg-yellow-50 dark:bg-yellow-950/20 rounded-lg text-center">
+                            <p className="text-[10px] md:text-xs text-yellow-600 dark:text-yellow-400">MODERATE</p>
+                            <p className="text-base md:text-xl font-bold text-yellow-700 dark:text-yellow-300">{moderateCount}</p>
+                          </div>
+                          <div className="p-2 md:p-3 bg-blue-50 dark:bg-blue-950/20 rounded-lg text-center">
+                            <p className="text-[10px] md:text-xs text-blue-600 dark:text-blue-400">MINOR</p>
+                            <p className="text-base md:text-xl font-bold text-blue-700 dark:text-blue-300">{minorCount}</p>
+                          </div>
+                        </div>
+                      </>
+                    )}
+
+                    <div className="w-full mt-4 md:mt-6 pt-4 md:pt-6 border-t border-[#e2e8f0] dark:border-[#334155]">
+                      <p className="text-xs md:text-sm text-[#0f172a] dark:text-white font-medium">Audited on</p>
+                      <p className="text-xs md:text-sm text-[#475569] dark:text-[#94a3b8]">
+                        {audit.createdAt ? format(new Date(audit.createdAt), "dd/MM/yyyy 'at' h:mm a") : 'Date not available'}
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </div>
+
+            {/* Right Column - Tabs for Issues, Roadmap, Manual Testing, Vision and Preview */}
+            <div className="lg:col-span-2">
+              <Tabs defaultValue={scanError ? "preview" : "issues"} value={activeTab} onValueChange={setActiveTab} className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <TabsList className="bg-[#f1f5f9] dark:bg-[#1e293b] flex flex-wrap h-auto">
+                    <TabsTrigger 
+                      value="issues" 
+                      className="data-[state=active]:bg-white dark:data-[state=active]:bg-[#0f172a] text-[#475569] dark:text-[#94a3b8] data-[state=active]:text-[#0f172a] dark:data-[state=active]:text-white text-xs md:text-sm px-2 md:px-3"
+                      disabled={scanError}
+                    >
+                      Issues {!scanError && `(${violations.length})`}
+                    </TabsTrigger>
+                    <TabsTrigger value="roadmap" className="data-[state=active]:bg-white dark:data-[state=active]:bg-[#0f172a] text-[#475569] dark:text-[#94a3b8] data-[state=active]:text-[#0f172a] dark:data-[state=active]:text-white text-xs md:text-sm px-2 md:px-3">
+                      Roadmap
+                    </TabsTrigger>
+                    <TabsTrigger value="manual" className="data-[state=active]:bg-white dark:data-[state=active]:bg-[#0f172a] text-[#475569] dark:text-[#94a3b8] data-[state=active]:text-[#0f172a] dark:data-[state=active]:text-white text-xs md:text-sm px-2 md:px-3">
+                      Manual
+                    </TabsTrigger>
+                    <TabsTrigger value="vision" className="data-[state=active]:bg-white dark:data-[state=active]:bg-[#0f172a] text-[#475569] dark:text-[#94a3b8] data-[state=active]:text-[#0f172a] dark:data-[state=active]:text-white text-xs md:text-sm px-2 md:px-3">
+                      👁️ AI Vision
+                    </TabsTrigger>
+                    <TabsTrigger value="preview" className="data-[state=active]:bg-white dark:data-[state=active]:bg-[#0f172a] text-[#475569] dark:text-[#94a3b8] data-[state=active]:text-[#0f172a] dark:data-[state=active]:text-white text-xs md:text-sm px-2 md:px-3">
+                      Preview
+                    </TabsTrigger>
+                  </TabsList>
+                </div>
+
+                <TabsContent value="issues" className="space-y-4 mt-0">
+                  {scanError ? (
+                    <div className="text-center py-8 md:py-12 bg-white dark:bg-[#1e293b] rounded-xl border border-[#e2e8f0] dark:border-[#334155] px-4">
+                      <Lock className="h-10 w-10 md:h-12 md:w-12 text-amber-500 mx-auto mb-4" />
+                      <h3 className="text-lg md:text-xl font-semibold text-[#0f172a] dark:text-white mb-2">
+                        No Issues Available
+                      </h3>
+                      <p className="text-sm md:text-base text-[#475569] dark:text-[#94a3b8] max-w-md mx-auto">
+                        The scan could not be completed due to website restrictions.
+                      </p>
+                    </div>
+                  ) : violations.length > 0 ? (
+                    violations.map((violation: any, index: number) => (
+                      <IssueCard key={index} issue={violation} />
+                    ))
+                  ) : (
+                    <div className="text-center py-8 md:py-12 bg-white dark:bg-[#1e293b] rounded-xl border border-[#e2e8f0] dark:border-[#334155] px-4">
+                      <Shield className="h-10 w-10 md:h-12 md:w-12 text-green-500 mx-auto mb-4" />
+                      <h3 className="text-lg md:text-xl font-semibold text-[#0f172a] dark:text-white mb-2">
+                        No accessibility issues found!
+                      </h3>
+                      <p className="text-sm md:text-base text-[#475569] dark:text-[#94a3b8]">
+                        This website passes all selected compliance standards.
+                      </p>
+                    </div>
+                  )}
+                </TabsContent>
+
+                <TabsContent value="roadmap" className="space-y-4 mt-0">
+                  {scanError ? (
+                    <div className="text-center py-8 md:py-12 bg-white dark:bg-[#1e293b] rounded-xl border border-[#e2e8f0] dark:border-[#334155] px-4">
+                      <Lock className="h-10 w-10 md:h-12 md:w-12 text-amber-500 mx-auto mb-4" />
+                      <h3 className="text-lg md:text-xl font-semibold text-[#0f172a] dark:text-white mb-2">
+                        Roadmap Unavailable
+                      </h3>
+                      <p className="text-sm md:text-base text-[#475569] dark:text-[#94a3b8]">
+                        Cannot generate remediation roadmap because the scan failed.
+                      </p>
+                    </div>
+                  ) : (
+                    <RemediationRoadmap violations={violations} />
+                  )}
+                </TabsContent>
+
+                <TabsContent value="manual" className="mt-4">
+                  <ManualTesting />
+                </TabsContent>
+
+                <TabsContent value="vision" className="space-y-4 mt-4">
+                  <VisionScanToggle 
+                    url={audit.url}
+                    onScanComplete={(issues) => {
+                      setVisionIssues(issues);
+                      setShowVisionIssues(true);
+                    }}
+                  />
+                  
+                  {showVisionIssues && visionIssues.length > 0 && (
+                    <div className="space-y-3">
+                      <h3 className="font-semibold">Visual Issues Detected ({visionIssues.length})</h3>
+                      {visionIssues.map((issue, idx) => (
+                        <div key={idx} className="p-4 border rounded-lg bg-[#f8fafc] dark:bg-[#0f172a]">
+                          <div className="flex items-center gap-2 mb-2">
+                            <span className={`text-xs px-2 py-1 rounded ${
+                              issue.impact === 'critical' ? 'bg-red-100 text-red-700' :
+                              issue.impact === 'serious' ? 'bg-orange-100 text-orange-700' :
+                              issue.impact === 'moderate' ? 'bg-yellow-100 text-yellow-700' :
+                              'bg-blue-100 text-blue-700'
+                            }`}>
+                              {issue.impact}
+                            </span>
+                            <span className="text-sm font-medium">{issue.help}</span>
+                          </div>
+                          <p className="text-sm text-[#475569] dark:text-[#94a3b8]">{issue.description}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  
+                  {showVisionIssues && visionIssues.length === 0 && (
+                    <div className="text-center py-8 text-[#64748b]">
+                      <p>No visual issues detected by AI.</p>
+                    </div>
+                  )}
+                </TabsContent>
+
+                <TabsContent value="preview" className="mt-0">
+                  <VisualPreview url={audit.url} />
+                </TabsContent>
+              </Tabs>
+            </div>
           </div>
-        </div>
-        <div className="space-y-4">
-          <Skeleton className="h-10 w-48" />
-          <Skeleton className="h-24 w-full rounded-xl" />
-          <Skeleton className="h-24 w-full rounded-xl" />
-          <Skeleton className="h-24 w-full rounded-xl" />
         </div>
       </div>
     </div>
   );
 }
-
-import { ExternalLink, CheckCircle } from "lucide-react";

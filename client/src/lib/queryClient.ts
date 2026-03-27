@@ -1,5 +1,10 @@
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
 
+// Backend URL - change this based on environment
+const API_BASE_URL = process.env.NODE_ENV === 'production' 
+  ? 'https://your-backend.vercel.app'  // Production URL (change this)
+  : 'http://localhost:3001';             // Development URL (Next.js backend)
+
 async function throwIfResNotOk(res: Response) {
   if (!res.ok) {
     const text = (await res.text()) || res.statusText;
@@ -12,11 +17,14 @@ export async function apiRequest(
   url: string,
   data?: unknown | undefined,
 ): Promise<Response> {
-  const res = await fetch(url, {
+  // Add API_BASE_URL to the request
+  const fullUrl = url.startsWith('http') ? url : `${API_BASE_URL}${url}`;
+  
+  const res = await fetch(fullUrl, {
     method,
     headers: data ? { "Content-Type": "application/json" } : {},
     body: data ? JSON.stringify(data) : undefined,
-    credentials: "include",
+    credentials: "omit", // Changed from "include" since we're not using auth
   });
 
   await throwIfResNotOk(res);
@@ -29,8 +37,11 @@ export const getQueryFn: <T>(options: {
 }) => QueryFunction<T> =
   ({ on401: unauthorizedBehavior }) =>
   async ({ queryKey }) => {
-    const res = await fetch(queryKey.join("/") as string, {
-      credentials: "include",
+    const url = queryKey.join("/") as string;
+    const fullUrl = url.startsWith('http') ? url : `${API_BASE_URL}${url}`;
+    
+    const res = await fetch(fullUrl, {
+      credentials: "omit", // Changed from "include"
     });
 
     if (unauthorizedBehavior === "returnNull" && res.status === 401) {
