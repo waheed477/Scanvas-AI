@@ -12,6 +12,10 @@ import AuditDetails from "@/pages/AuditDetails";
 import HistoryPage from "@/pages/History";
 import About from "@/pages/About";
 import NotFound from "@/pages/not-found";
+import PrivacyPolicy from "@/pages/legal/privacy";
+import TermsOfService from "@/pages/legal/terms";
+import { CookieConsent } from "@/components/CookieConsent";
+import { ProfessionalBackground } from "@/components/ProfessionalBackground";
 
 function Router() {
   return (
@@ -21,6 +25,8 @@ function Router() {
       <Route path="/audit/:id" component={AuditDetails} />
       <Route path="/history" component={HistoryPage} />
       <Route path="/about" component={About} />
+      <Route path="/legal/privacy" component={PrivacyPolicy} />
+      <Route path="/legal/terms" component={TermsOfService} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -31,17 +37,15 @@ function App() {
     <SessionProvider basePath="/api/auth">
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
-          <div className="min-h-screen bg-[#f8fafc] dark:bg-[#0f172a] relative flex flex-col">
-            <div className="fixed inset-0 pointer-events-none">
-              <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-[#2563eb]/10 to-transparent rounded-full blur-3xl" />
-              <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-[#7c3aed]/10 to-transparent rounded-full blur-3xl" />
-            </div>
+          <div className="min-h-screen bg-white relative">
+            <ProfessionalBackground />
             <Navbar />
             <main className="relative flex-grow">
               <Router />
             </main>
             <Footer />
             <Toaster />
+            <CookieConsent />
           </div>
         </TooltipProvider>
       </QueryClientProvider>

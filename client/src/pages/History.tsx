@@ -144,8 +144,7 @@ export default function HistoryPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] dark:bg-[#0f172a] py-4 md:py-8 px-3 md:px-4">
-      <div className="container max-w-6xl mx-auto">
+<div className="min-h-screen bg-white">      <div className="container max-w-6xl mx-auto">
         {/* Header Section - Responsive */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
           <div>

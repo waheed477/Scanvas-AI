@@ -21,6 +21,7 @@ import { ShareReport } from "@/components/ShareReport";
 import { ManualTesting } from "@/components/ManualTesting";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { VisionScanToggle } from "@/components/VisionScanToggle";
+import { BenchmarkComparison } from "@/components/BenchmarkComparison";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -44,8 +45,8 @@ export default function AuditDetails() {
   // Guard condition
   if (!id || id === 'undefined') {
     return (
-      <div className="min-h-screen bg-[#f8fafc] dark:bg-[#0f172a] flex items-center justify-center p-4">
-        <div className="text-center">
+<div className="min-h-screen bg-white">
+          <div className="text-center">
           <Loader2 className="h-8 w-8 animate-spin text-[#2563eb] mx-auto mb-4" />
           <p className="text-[#475569] dark:text-[#94a3b8]">Loading audit details...</p>
         </div>
@@ -71,8 +72,8 @@ export default function AuditDetails() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#f8fafc] dark:bg-[#0f172a] flex items-center justify-center p-4">
-        <div className="text-center">
+<div className="min-h-screen bg-white">
+          <div className="text-center">
           <Loader2 className="h-8 w-8 animate-spin text-[#2563eb] mx-auto mb-4" />
           <p className="text-[#475569] dark:text-[#94a3b8]">Loading audit details...</p>
         </div>
@@ -83,8 +84,8 @@ export default function AuditDetails() {
   if (error || !audit) {
     console.error('Audit fetch error:', error);
     return (
-      <div className="min-h-screen bg-[#f8fafc] dark:bg-[#0f172a] flex items-center justify-center p-4">
-        <div className="text-center max-w-md w-full">
+<div className="min-h-screen bg-white">
+          <div className="text-center max-w-md w-full">
           <ServerCrash className="h-16 w-16 text-red-500 mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-[#0f172a] dark:text-white mb-2">Audit not found</h2>
           <p className="text-[#475569] dark:text-[#94a3b8] mb-4">The audit you're looking for doesn't exist or couldn't be loaded.</p>
@@ -200,8 +201,8 @@ export default function AuditDetails() {
   );
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] dark:bg-[#0f172a] py-4 md:py-8 px-3 md:px-4">
-      <div className="container max-w-6xl mx-auto">
+<div className="min-h-screen bg-white">
+        <div className="container max-w-6xl mx-auto">
         {/* Header with back button and responsive actions */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 md:mb-6">
           <Button
@@ -349,6 +350,11 @@ export default function AuditDetails() {
                   </CardContent>
                 </Card>
               </motion.div>
+
+              {/* Benchmark Comparison */}
+              {!scanError && (
+                <BenchmarkComparison url={audit.url} score={audit.score} />
+              )}
             </div>
 
             {/* Right Column - Tabs for Issues, Roadmap, Manual Testing, Vision and Preview */}

@@ -10,6 +10,8 @@ import LoadingBar from "@/components/LoadingBar";
 // Added import for BatchScanner component to enable batch scanning functionality
 import { BatchScanner } from "@/components/BatchScanner";
 import { WelcomeTour } from "@/components/WelcomeTour";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+
 // Real testimonials from accessibility industry leaders
 const testimonials = [
   {
@@ -103,8 +105,8 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] dark:bg-[#0f172a] text-[#0f172a] dark:text-white relative overflow-hidden">
-      {/* Loading Bar */}
+<div className="min-h-screen bg-white">
+        {/* Loading Bar */}
       {showLoading && (
         <LoadingBar 
           duration={3}
@@ -201,43 +203,54 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* Features Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-24">
-            {[
-              { 
-                icon: <Shield className="w-6 h-6" />,
-                title: "WCAG 2.1 Compliant", 
-                desc: "Checks against the latest international standards.",
-                gradient: "from-[#2563eb]/20 to-[#2563eb]/5"
-              },
-              { 
-                icon: <Zap className="w-6 h-6" />,
-                title: "Instant Reports", 
-                desc: "Get detailed insights in seconds, not hours.",
-                gradient: "from-[#7c3aed]/20 to-[#7c3aed]/5"
-              },
-              { 
-                icon: <BarChart className="w-6 h-6" />,
-                title: "Actionable Fixes", 
-                desc: "Developers get exact code snippets to fix issues.",
-                gradient: "from-[#2563eb]/20 to-[#7c3aed]/5"
-              }
-            ].map((f, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 + (i * 0.1) }}
-                className={`p-6 rounded-2xl bg-gradient-to-br ${f.gradient} dark:bg-[#1e293b] backdrop-blur-sm border border-white/20 dark:border-[#334155] shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group`}
-              >
-                <div className="w-12 h-12 rounded-xl bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-sm flex items-center justify-center text-[#2563eb] dark:text-[#7c3aed] mb-4 group-hover:scale-110 transition-transform">
-                  {f.icon}
-                </div>
-                <h3 className="text-lg font-bold text-[#0f172a] dark:text-white mb-2">{f.title}</h3>
-                <p className="text-[#475569] dark:text-[#94a3b8] text-sm leading-relaxed">{f.desc}</p>
-              </motion.div>
-            ))}
-          </div>
+          {/* Features Grid with Tooltips */}
+          <TooltipProvider>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-24">
+              {[
+                { 
+                  icon: <Shield className="w-6 h-6" />,
+                  title: "WCAG 2.1 Compliant", 
+                  desc: "Checks against the latest international standards.",
+                  tooltip: "WCAG 2.1 covers web accessibility, ensuring content is perceivable, operable, understandable, and robust for all users.",
+                  gradient: "from-[#2563eb]/20 to-[#2563eb]/5"
+                },
+                { 
+                  icon: <Zap className="w-6 h-6" />,
+                  title: "Instant Reports", 
+                  desc: "Get detailed insights in seconds, not hours.",
+                  tooltip: "Our scanning engine analyzes websites in real-time, delivering comprehensive reports within seconds.",
+                  gradient: "from-[#7c3aed]/20 to-[#7c3aed]/5"
+                },
+                { 
+                  icon: <BarChart className="w-6 h-6" />,
+                  title: "Actionable Fixes", 
+                  desc: "Developers get exact code snippets to fix issues.",
+                  tooltip: "Each issue comes with code examples and step-by-step remediation guidance for developers.",
+                  gradient: "from-[#2563eb]/20 to-[#7c3aed]/5"
+                }
+              ].map((f, i) => (
+                <Tooltip key={i}>
+                  <TooltipTrigger asChild>
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.4 + (i * 0.1) }}
+                      className={`p-6 rounded-2xl bg-gradient-to-br ${f.gradient} dark:bg-[#1e293b] backdrop-blur-sm border border-white/20 dark:border-[#334155] shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group cursor-help`}
+                    >
+                      <div className="w-12 h-12 rounded-xl bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-sm flex items-center justify-center text-[#2563eb] dark:text-[#7c3aed] mb-4 group-hover:scale-110 transition-transform">
+                        {f.icon}
+                      </div>
+                      <h3 className="text-lg font-bold text-[#0f172a] dark:text-white mb-2">{f.title}</h3>
+                      <p className="text-[#475569] dark:text-[#94a3b8] text-sm leading-relaxed">{f.desc}</p>
+                    </motion.div>
+                  </TooltipTrigger>
+                  <TooltipContent className="max-w-xs">
+                    <p>{f.tooltip}</p>
+                  </TooltipContent>
+                </Tooltip>
+              ))}
+            </div>
+          </TooltipProvider>
 
           {/* Trust Badges Section */}
           <div className="mt-16 py-8 border-t border-b border-[#e2e8f0] dark:border-[#334155]">

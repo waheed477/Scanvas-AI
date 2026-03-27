@@ -17,8 +17,8 @@
 }
 
 @keyframes pulse-glow {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 0.8; }
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
 }
 
 @keyframes spin-slow {
@@ -48,57 +48,68 @@
 }
 
 :root {
-  --background: #f8fafc;
-  --foreground: #0f172a;
-  --primary: #2563eb;
+  --background: #ffffff;
+  --foreground: #111827;
+  --primary: #334155;
   --primary-foreground: #ffffff;
-  --secondary: #7c3aed;
+  --secondary: #64748b;
   --secondary-foreground: #ffffff;
-  --muted: #e2e8f0;
-  --muted-foreground: #475569;
-  --accent: #3b82f6;
+  --accent: #5b6e8c;
   --accent-foreground: #ffffff;
-  --card: #ffffff;
-  --card-foreground: #0f172a;
+  --muted: #f8fafc;
+  --muted-foreground: #64748b;
+  --card: #f8fafc;
+  --card-foreground: #111827;
   --border: #e2e8f0;
   --input: #e2e8f0;
-  --ring: #2563eb;
+  --ring: #334155;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: var(--background);
+  background-color: #ffffff;
   color: var(--foreground);
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar - Minimalist Gray */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #e2e8f0;
+  background: #f1f5f9;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #94a3b8;
+  background: #cbd5e1;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #64748b;
-}
-@keyframes heartBeat {
-  0%, 100% { transform: scale(1); }
-  25% { transform: scale(1.1); }
-  50% { transform: scale(1); }
-  75% { transform: scale(1.1); }
+  background: #94a3b8;
 }
 
-.animate-heartbeat {
-  animation: heartBeat 1.5s ease-in-out infinite;
+/* Button Styles - Minimalist Gray */
+.btn-primary {
+  background-color: #334155;
+  color: white;
+  transition: all 0.2s ease;
+}
+.btn-primary:hover {
+  background-color: #5b6e8c;
+}
+
+.btn-secondary {
+  background-color: #f8fafc;
+  color: #334155;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease;
+}
+.btn-secondary:hover {
+  border-color: #334155;
+  background-color: #f1f5f9;
 }

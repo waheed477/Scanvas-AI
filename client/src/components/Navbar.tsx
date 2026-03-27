@@ -17,18 +17,20 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-md border-b border-[#e2e8f0] dark:border-[#334155] shadow-sm">
+    <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-[#e2e8f0] shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
-          {/* Logo with gradient - removed icon */}
+          {/* Logo */}
           <Link href="/">
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               className="flex items-center gap-2 cursor-pointer group"
             >
-              {/* Icon removed as requested */}
-              <span className="text-xl font-bold bg-gradient-to-r from-[#2563eb] via-[#7c3aed] to-[#2563eb] bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
+              <div className="w-8 h-8 rounded-lg bg-[#334155] flex items-center justify-center shadow-md">
+                <span className="text-white font-bold text-sm">S</span>
+              </div>
+              <span className="text-xl font-bold text-[#334155]">
                 Scanvas
               </span>
             </motion.div>
@@ -42,15 +44,15 @@ export default function Navbar() {
                   variant="ghost"
                   className={`relative px-4 py-2 rounded-full transition-all ${
                     location === item.path
-                      ? "text-[#2563eb] bg-[#2563eb]/10 dark:text-[#7c3aed] dark:bg-[#7c3aed]/10 font-medium"
-                      : "text-[#475569] dark:text-[#94a3b8] hover:text-[#2563eb] dark:hover:text-[#7c3aed] hover:bg-[#2563eb]/5 dark:hover:bg-[#7c3aed]/10"
+                      ? "text-[#334155] bg-[#334155]/10 font-medium"
+                      : "text-[#64748b] hover:text-[#334155] hover:bg-[#334155]/5"
                   }`}
                 >
                   {item.name}
                   {location === item.path && (
                     <motion.div
                       layoutId="activeNav"
-                      className="absolute bottom-0 left-2 right-2 h-0.5 bg-gradient-to-r from-[#2563eb] to-[#7c3aed] rounded-full"
+                      className="absolute bottom-0 left-2 right-2 h-0.5 bg-[#334155] rounded-full"
                       initial={false}
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
@@ -62,18 +64,17 @@ export default function Navbar() {
 
           {/* Right side buttons - Auth */}
           <div className="hidden md:flex items-center gap-2">
-            {/* ThemeToggle component would go here if available */}
             {status === "loading" ? (
-              <div className="w-20 h-9 animate-pulse bg-[#f1f5f9] dark:bg-[#334155] rounded-full" />
+              <div className="w-20 h-9 animate-pulse bg-[#f1f5f9] rounded-full" />
             ) : session ? (
               <>
-                <span className="text-sm text-[#475569] dark:text-[#94a3b8]">
+                <span className="text-sm text-[#64748b]">
                   {session.user?.email?.split('@')[0]}
                 </span>
                 <Button
                   variant="outline"
                   onClick={() => signOut()}
-                  className="rounded-full border-[#2563eb]/20 hover:bg-red-50 hover:text-red-600"
+                  className="rounded-full border-[#334155]/20 text-[#334155] hover:bg-[#334155] hover:text-white"
                 >
                   Sign Out
                 </Button>
@@ -81,23 +82,23 @@ export default function Navbar() {
             ) : (
               <Button
                 onClick={() => signIn('google', { callbackUrl: 'http://localhost:3000' })}
-                className="rounded-full bg-gradient-to-r from-[#2563eb] to-[#7c3aed] text-white"
+                className="rounded-full bg-[#334155] hover:bg-[#5b6e8c] text-white"
               >
                 Sign In
               </Button>
             )}
           </div>
 
-          {/* Mobile menu button - ONLY menu button */}
+          {/* Mobile menu button */}
           <div className="flex items-center gap-2 md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 rounded-lg hover:bg-[#2563eb]/10 transition-colors"
+              className="p-2 rounded-lg hover:bg-[#334155]/10 transition-colors"
             >
               {isMenuOpen ? (
-                <X className="w-6 h-6 text-[#2563eb]" />
+                <X className="w-6 h-6 text-[#334155]" />
               ) : (
-                <Menu className="w-6 h-6 text-[#475569] dark:text-[#94a3b8]" />
+                <Menu className="w-6 h-6 text-[#64748b]" />
               )}
             </button>
           </div>
@@ -109,7 +110,7 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="md:hidden py-4 border-t border-[#e2e8f0] dark:border-[#334155] bg-white/90 dark:bg-[#0f172a]/90 backdrop-blur-md"
+            className="md:hidden py-4 border-t border-[#e2e8f0] bg-white/90 backdrop-blur-md"
           >
             {navItems.map((item) => (
               <Link key={item.path} href={item.path}>
@@ -117,8 +118,8 @@ export default function Navbar() {
                   variant="ghost"
                   className={`w-full justify-start mb-1 ${
                     location === item.path
-                      ? "text-[#2563eb] bg-[#2563eb]/10 dark:text-[#7c3aed] dark:bg-[#7c3aed]/10"
-                      : "text-[#475569] dark:text-[#94a3b8]"
+                      ? "text-[#334155] bg-[#334155]/10"
+                      : "text-[#64748b]"
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
@@ -128,12 +129,12 @@ export default function Navbar() {
             ))}
             
             {/* Mobile auth buttons */}
-            <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-[#e2e8f0] dark:border-[#334155]">
+            <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-[#e2e8f0]">
               {status === "loading" ? (
-                <div className="w-full h-9 animate-pulse bg-[#f1f5f9] dark:bg-[#334155] rounded-full" />
+                <div className="w-full h-9 animate-pulse bg-[#f1f5f9] rounded-full" />
               ) : session ? (
                 <>
-                  <p className="text-sm text-[#475569] px-2">Signed in as {session.user?.email}</p>
+                  <p className="text-sm text-[#64748b] px-2">Signed in as {session.user?.email}</p>
                   <Button variant="outline" onClick={() => signOut()} className="w-full">
                     Sign Out
                   </Button>
@@ -141,7 +142,7 @@ export default function Navbar() {
               ) : (
                 <Button
                   onClick={() => signIn('google', { callbackUrl: 'http://localhost:3000' })}
-                  className="w-full bg-gradient-to-r from-[#2563eb] to-[#7c3aed] text-white"
+                  className="w-full bg-[#334155] hover:bg-[#5b6e8c] text-white"
                 >
                   Sign In
                 </Button>

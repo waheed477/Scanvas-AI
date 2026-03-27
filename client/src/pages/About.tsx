@@ -59,7 +59,7 @@ export default function About() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] dark:bg-[#0f172a] relative overflow-hidden">
+    <div className="min-h-screen bg-white">
       {/* Animated Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 -left-40 w-64 md:w-96 h-64 md:h-96 bg-gradient-to-br from-[#2563eb]/20 to-[#7c3aed]/20 rounded-full blur-3xl animate-float" />
