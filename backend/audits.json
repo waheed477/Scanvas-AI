@@ -1,0 +1,2627 @@
+[
+  {
+    "id": "1774694703917",
+    "url": "https://xodo.com/pdf-to-word-converter",
+    "score": 50,
+    "summary": {
+      "critical": 0,
+      "serious": 1,
+      "moderate": 1,
+      "minor": 0,
+      "total": 2
+    },
+    "createdAt": "2026-03-28T10:45:03.917Z",
+    "results": {
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=axeAPI",
+          "nodes": [
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#868e96",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 3.32,
+                    "fontSize": "10.5pt (14px)",
+                    "fontWeight": "normal",
+                    "messageKey": null,
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [
+                    {
+                      "html": "<div class=\"chakra-stack css-1uepxzp\">",
+                      "target": [
+                        ".css-1uepxzp"
+                      ]
+                    }
+                  ],
+                  "impact": "serious",
+                  "message": "Element has insufficient color contrast of 3.32 (foreground color: #868e96, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": "serious",
+              "html": "<a href=\"/\">Home</a>",
+              "target": [
+                "li:nth-child(1) > a[href=\"/\"]"
+              ],
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.32 (foreground color: #868e96, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#868e96",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 3.32,
+                    "fontSize": "10.5pt (14px)",
+                    "fontWeight": "normal",
+                    "messageKey": null,
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [
+                    {
+                      "html": "<div class=\"chakra-stack css-1uepxzp\">",
+                      "target": [
+                        ".css-1uepxzp"
+                      ]
+                    }
+                  ],
+                  "impact": "serious",
+                  "message": "Element has insufficient color contrast of 3.32 (foreground color: #868e96, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": "serious",
+              "html": "<a href=\"/pdf-to-word-converter\">PDF to Word Converter</a>",
+              "target": [
+                "li:nth-child(2) > a[href$=\"pdf-to-word-converter\"]"
+              ],
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.32 (foreground color: #868e96, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#7d7e7f",
+                    "bgColor": "#f1f3f5",
+                    "contrastRatio": 3.65,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "messageKey": null,
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [
+                    {
+                      "html": "<div class=\"css-hwrxeb\">",
+                      "target": [
+                        ".css-hwrxeb"
+                      ]
+                    }
+                  ],
+                  "impact": "serious",
+                  "message": "Element has insufficient color contrast of 3.65 (foreground color: #7d7e7f, background color: #f1f3f5, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": "serious",
+              "html": "<p class=\"chakra-text css-18pua0g\">",
+              "target": [
+                ".css-18pua0g"
+              ],
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.65 (foreground color: #7d7e7f, background color: #f1f3f5, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#858585",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 3.69,
+                    "fontSize": "10.5pt (14px)",
+                    "fontWeight": "normal",
+                    "messageKey": null,
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [
+                    {
+                      "html": "<div class=\"css-1tlzr0c\">",
+                      "target": [
+                        ".css-1tlzr0c"
+                      ]
+                    }
+                  ],
+                  "impact": "serious",
+                  "message": "Element has insufficient color contrast of 3.69 (foreground color: #858585, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": "serious",
+              "html": "<p class=\"chakra-text css-1v07hd8\">We keep your data safe and confidential (permanently deleted after 1h).</p>",
+              "target": [
+                ".css-1ykrcud > .css-x6s4vz.chakra-stack > .css-17nyj9w.chakra-stack:nth-child(1) > .css-1v07hd8.chakra-text"
+              ],
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.69 (foreground color: #858585, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#858585",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 3.69,
+                    "fontSize": "10.5pt (14px)",
+                    "fontWeight": "normal",
+                    "messageKey": null,
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [
+                    {
+                      "html": "<div class=\"css-1tlzr0c\">",
+                      "target": [
+                        ".css-1tlzr0c"
+                      ]
+                    }
+                  ],
+                  "impact": "serious",
+                  "message": "Element has insufficient color contrast of 3.69 (foreground color: #858585, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": "serious",
+              "html": "<p class=\"chakra-text css-1v07hd8\">Process your files in seconds – save time for more important tasks.</p>",
+              "target": [
+                ".css-1ykrcud > .css-x6s4vz.chakra-stack > .css-17nyj9w.chakra-stack:nth-child(2) > .css-1v07hd8.chakra-text"
+              ],
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.69 (foreground color: #858585, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#858585",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 3.69,
+                    "fontSize": "10.5pt (14px)",
+                    "fontWeight": "normal",
+                    "messageKey": null,
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [
+                    {
+                      "html": "<div class=\"css-1tlzr0c\">",
+                      "target": [
+                        ".css-1tlzr0c"
+                      ]
+                    }
+                  ],
+                  "impact": "serious",
+                  "message": "Element has insufficient color contrast of 3.69 (foreground color: #858585, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": "serious",
+              "html": "<p class=\"chakra-text css-1v07hd8\">Use Xodo tools on every device. Windows, Mac, Linux, Android, iOS.</p>",
+              "target": [
+                ".css-1ykrcud > .css-x6s4vz.chakra-stack > .css-17nyj9w.chakra-stack:nth-child(3) > .css-1v07hd8.chakra-text"
+              ],
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.69 (foreground color: #858585, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#868e96",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 3.32,
+                    "fontSize": "9.0pt (12px)",
+                    "fontWeight": "normal",
+                    "messageKey": null,
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [
+                    {
+                      "html": "<div class=\"css-16ygovh\">",
+                      "target": [
+                        ".css-15etjgv > .css-16ygovh"
+                      ]
+                    }
+                  ],
+                  "impact": "serious",
+                  "message": "Element has insufficient color contrast of 3.32 (foreground color: #868e96, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": "serious",
+              "html": "<p class=\"chakra-text css-171l8ya\">6064 Votes</p>",
+              "target": [
+                ".css-15etjgv > .css-16ygovh > .css-171l8ya.chakra-text"
+              ],
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.32 (foreground color: #868e96, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#858585",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 3.69,
+                    "fontSize": "9.0pt (12px)",
+                    "fontWeight": "normal",
+                    "messageKey": null,
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [
+                    {
+                      "html": "<div class=\"css-1tlzr0c\">",
+                      "target": [
+                        ".css-1tlzr0c"
+                      ]
+                    }
+                  ],
+                  "impact": "serious",
+                  "message": "Element has insufficient color contrast of 3.69 (foreground color: #858585, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": "serious",
+              "html": "<p class=\"chakra-text css-1hhkag8\">Powered by<!-- --> </p>",
+              "target": [
+                ".css-10tn8x > .css-1l4w6pd > .css-gv6hd > .css-1hhkag8.chakra-text"
+              ],
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.69 (foreground color: #858585, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "id": "meta-viewport",
+          "impact": "moderate",
+          "tags": [
+            "cat.sensory-and-visual-cues",
+            "wcag2aa",
+            "wcag144",
+            "EN-301-549",
+            "EN-9.1.4.4",
+            "ACT",
+            "RGAAv4",
+            "RGAA-10.4.2"
+          ],
+          "description": "Ensure <meta name=\"viewport\"> does not disable text scaling and zooming",
+          "help": "Zooming and scaling must not be disabled",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/meta-viewport?application=axeAPI",
+          "nodes": [
+            {
+              "any": [
+                {
+                  "id": "meta-viewport",
+                  "data": "user-scalable=no",
+                  "relatedNodes": [],
+                  "impact": "moderate",
+                  "message": "user-scalable=no on <meta> tag disables zooming on mobile devices"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": "moderate",
+              "html": "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no\">",
+              "target": [
+                "meta[name=\"viewport\"]"
+              ],
+              "failureSummary": "Fix any of the following:\n  user-scalable=no on <meta> tag disables zooming on mobile devices"
+            }
+          ]
+        }
+      ],
+      "passes": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=axeAPI",
+          "nodes": [
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#ffffff",
+                    "bgColor": "#0206a8",
+                    "contrastRatio": 13.17,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 13.17"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<a rel=\"noopener\" tabindex=\"0\" href=\"https://xodo.com/link-free/privacy\" target=\"_blank\" class=\" osano-cm-storage-policy osano-cm-content__link osano-cm-link \" aria-describedby=\"osano-cm-aria.newWindow\"><!--?lit$726471822$-->Privacy Policy</a>",
+              "target": [
+                ".osano-cm-storage-policy"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 16.31,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 16.31"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<div class=\"css-bk2alg\">Products<svg viewBox=\"0 0 24 24\" focusable=\"false\" class=\"chakra-icon css-7o4ukm\"><path fill=\"currentColor\" d=\"M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z\"></path></svg></div>",
+              "target": [
+                "#menu-button-8 > .css-xl71ch > .css-bk2alg"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 16.31,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 16.31"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<div class=\"online-tools-dropdown-trigger css-bk2alg\">Online Tools<svg viewBox=\"0 0 24 24\" focusable=\"false\" class=\"chakra-icon css-7o4ukm\"><path fill=\"currentColor\" d=\"M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z\"></path></svg></div>",
+              "target": [
+                ".online-tools-dropdown-trigger.css-bk2alg"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 16.31,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 16.31"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<div class=\"css-bk2alg\">Industries<svg viewBox=\"0 0 24 24\" focusable=\"false\" class=\"chakra-icon css-7o4ukm\"><path fill=\"currentColor\" d=\"M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z\"></path></svg></div>",
+              "target": [
+                "#menu-button-14 > .css-xl71ch > .css-bk2alg"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 16.31,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 16.31"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<a class=\"chakra-link nav-link-business group css-1vhjzbx\" id=\"next-link-no-title\" data-testid=\"nav-link-business\" href=\"/business\">Business<div class=\"css-pyw09s\"></div></a>",
+              "target": [
+                ".nav-link-business"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 16.31,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 16.31"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<a class=\"chakra-link nav-link-pricing group css-1vhjzbx\" id=\"next-link-no-title\" data-testid=\"nav-link-pricing\" href=\"/pricing\">Pricing<div class=\"css-pyw09s\"></div></a>",
+              "target": [
+                ".nav-link-pricing"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 16.31,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 16.31"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<a class=\"chakra-link nav-link-blog group css-1vhjzbx\" id=\"next-link-no-title\" data-testid=\"nav-link-blog\" href=\"/blog\">Blog<div class=\"css-pyw09s\"></div></a>",
+              "target": [
+                ".nav-link-blog"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#ffffff",
+                    "bgColor": "#0206a8",
+                    "contrastRatio": 13.17,
+                    "fontSize": "10.5pt (14px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 13.17"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<button type=\"button\" class=\"chakra-button css-kuw1ik\" data-testid=\"topbar-start-free-trial\" id=\"top-bar-free-trial\">Start Free Trial</button>",
+              "target": [
+                "#top-bar-free-trial"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#0206a8",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 13.17,
+                    "fontSize": "10.5pt (14px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 13.17"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<button type=\"button\" class=\"chakra-button css-hc0sd9\">Contact Sales</button>",
+              "target": [
+                ".css-hc0sd9"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 16.31,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 16.31"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<button type=\"button\" class=\"chakra-button css-wfvxgf\" id=\"apps-button\">",
+              "target": [
+                "#apps-button"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 16.31,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 16.31"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<button type=\"button\" class=\"chakra-button css-1oumsdt\" id=\"sign-in-button\">Log In</button>",
+              "target": [
+                "#sign-in-button"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "messageKey": "hidden"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element is hidden"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<input type=\"file\" accept=\"application/pdf,.pdf\" multiple=\"\" style=\"display:none\" tabindex=\"-1\">",
+              "target": [
+                "input"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#f1f3f5",
+                    "contrastRatio": 14.67,
+                    "fontSize": "15.0pt (20px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 14.67"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<h1 class=\"chakra-text css-10c9eaj\"><img width=\"14px\" height=\"8px\" alt=\"Free online PDF to Word converter by Xodo\" src=\"https://cdn.xodo.com/21.26.0/public/img/icons/pdf-to-word-color.svg\" class=\"chakra-image css-ifzj4q\">PDF to Word Converter</h1>",
+              "target": [
+                "h1"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#485056",
+                    "bgColor": "#f1f3f5",
+                    "contrastRatio": 7.38,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 7.38"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<h2 class=\"chakra-text css-1cxx1hf\" data-testid=\"marketing-operations-description\">Convert native and scanned PDFs\n to editable Word documents</h2>",
+              "target": [
+                ".css-1cxx1hf"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#ffffff",
+                    "bgColor": "#0206a8",
+                    "contrastRatio": 13.17,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 13.17"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<button type=\"button\" class=\"chakra-button select-files-button css-f17ds3\" id=\"select-file-button\" data-testid=\"select-file-button\" title=\"Select File\" tabindex=\"0\">",
+              "target": [
+                "#select-file-button"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#343a40",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 11.5,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 11.5"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<button type=\"button\" class=\"chakra-button css-h5cmke\" id=\"xodo-drive-button\" title=\"Select Files from Xodo Drive\" tabindex=\"0\">",
+              "target": [
+                "#xodo-drive-button"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#343a40",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 11.5,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 11.5"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<button type=\"button\" class=\"chakra-button css-h5cmke\" id=\"dropbox-button\" title=\"Select files from Dropbox\" tabindex=\"0\">",
+              "target": [
+                "#dropbox-button"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#343a40",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 11.5,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 11.5"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<button type=\"button\" class=\"chakra-button css-h5cmke\" id=\"google-drive-button\" title=\"Select files from Google Drive\" tabindex=\"0\">",
+              "target": [
+                "#google-drive-button"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 16.31,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 16.31"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<p class=\"chakra-text css-119c1na\">Your Files are Secure</p>",
+              "target": [
+                ".css-1ykrcud > .css-x6s4vz.chakra-stack > .css-17nyj9w.chakra-stack:nth-child(1) > .css-119c1na.chakra-text"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 16.31,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 16.31"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<p class=\"chakra-text css-119c1na\">Get Job Done Fast</p>",
+              "target": [
+                ".css-1ykrcud > .css-x6s4vz.chakra-stack > .css-17nyj9w.chakra-stack:nth-child(2) > .css-119c1na.chakra-text"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 16.31,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 16.31"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<p class=\"chakra-text css-119c1na\">Work on Any Platform</p>",
+              "target": [
+                ".css-1ykrcud > .css-x6s4vz.chakra-stack > .css-17nyj9w.chakra-stack:nth-child(3) > .css-119c1na.chakra-text"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 16.31,
+                    "fontSize": "9.0pt (12px)",
+                    "fontWeight": "bold",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 16.31"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<p class=\"chakra-text css-7lhe6t\">Rate this tool</p>",
+              "target": [
+                ".css-15etjgv > .css-16ygovh > .css-7lhe6t.chakra-text"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 16.31,
+                    "fontSize": "9.0pt (12px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 16.31"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<p class=\"chakra-text css-verv82\">4.6</p>",
+              "target": [
+                ".css-15etjgv > .css-16ygovh > .css-verv82.chakra-text"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#0206a8",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 13.17,
+                    "fontSize": "9.0pt (12px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 13.17"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<a class=\"chakra-button apryse-link-button css-1u3a41k\" href=\"https://apryse.com\" target=\"_blank\" rel=\"noopener noreferrer\">Apryse</a>",
+              "target": [
+                ".css-10tn8x > .css-1l4w6pd > .css-gv6hd > .apryse-link-button.css-1u3a41k[rel=\"noopener noreferrer\"]"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#334758",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 9.61,
+                    "fontSize": "15.0pt (20px)",
+                    "fontWeight": "bold",
+                    "expectedContrastRatio": "3:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 9.61"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<h2 class=\"chakra-heading css-apk1bw\" data-testid=\"instructions-title\">How to convert PDF to Word</h2>",
+              "target": [
+                ".css-apk1bw"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#334758",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 9.61,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 9.61"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<p class=\"chakra-text css-1ivuhw7\">Follow these simple steps to convert a PDF to Word using Xodo:</p>",
+              "target": [
+                ".css-1ivuhw7"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#485056",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 8.21,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "bold",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 8.21"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<p class=\"chakra-text css-1fjard5\">1.</p>",
+              "target": [
+                ".css-vi867y.chakra-stack:nth-child(1) > .css-1fjard5.chakra-text"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#485056",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 8.21,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 8.21"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<p class=\"chakra-text css-1gw3f70\">Upload your PDF to the free online PDF to Word converter.</p>",
+              "target": [
+                ".css-vi867y.chakra-stack:nth-child(1) > .css-1gw3f70.chakra-text"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#485056",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 8.21,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "bold",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 8.21"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<p class=\"chakra-text css-1fjard5\">2.</p>",
+              "target": [
+                ".css-vi867y.chakra-stack:nth-child(2) > .css-1fjard5.chakra-text"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#485056",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 8.21,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 8.21"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<p class=\"chakra-text css-1gw3f70\">Click “Convert” - OCR is automatically applied to scanned PDFs.</p>",
+              "target": [
+                ".css-vi867y.chakra-stack:nth-child(2) > .css-1gw3f70.chakra-text"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#485056",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 8.21,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "bold",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 8.21"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<p class=\"chakra-text css-1fjard5\">3.</p>",
+              "target": [
+                ".css-vi867y.chakra-stack:nth-child(3) > .css-1fjard5.chakra-text"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#485056",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 8.21,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 8.21"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<p class=\"chakra-text css-1gw3f70\">Download your editable Word (.docx) file.</p>",
+              "target": [
+                ".css-vi867y.chakra-stack:nth-child(3) > .css-1gw3f70.chakra-text"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#0206a8",
+                    "bgColor": "#f7f8f9",
+                    "contrastRatio": 12.38,
+                    "fontSize": "18.0pt (24px)",
+                    "fontWeight": "bold",
+                    "expectedContrastRatio": "3:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 12.38"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<h3 class=\"chakra-text css-1w8yfb8\">Looking to convert your files offline instead?</h3>",
+              "target": [
+                "h3"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#f7f8f9",
+                    "contrastRatio": 15.34,
+                    "fontSize": "13.5pt (18px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 15.34"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<p class=\"chakra-text css-1rjdib8\">Accurately convert PDF to Word offline with Xodo PDF Studio – try our feature-rich desktop converter for Windows, Mac, and Linux.</p>",
+              "target": [
+                ".css-1rjdib8"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#ffffff",
+                    "bgColor": "#0206a8",
+                    "contrastRatio": 13.17,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 13.17"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<a class=\"chakra-button css-8ufdud\" id=\"callout-primary-button\" data-testid=\"callout-primary-button\" href=\"/pdf-studio\">Download Free</a>",
+              "target": [
+                "#callout-primary-button"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#f8f9fa",
+                    "contrastRatio": 15.48,
+                    "fontSize": "18.0pt (24px)",
+                    "fontWeight": "bold",
+                    "expectedContrastRatio": "3:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 15.48"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<h2 class=\"chakra-heading css-1aqcadz\">PDF to Word FAQ</h2>",
+              "target": [
+                ".css-1aqcadz"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#485056",
+                    "bgColor": "#f1f3f5",
+                    "contrastRatio": 7.38,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 7.38"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<div class=\"css-ynmvqj\">How to change PDF to Word for free?</div>",
+              "target": [
+                "#accordion-button-25 > .css-ynmvqj"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#485056",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 8.21,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 8.21"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<div role=\"region\" id=\"accordion-panel-25\" aria-labelledby=\"accordion-button-25\" class=\"chakra-accordion__panel css-scs70e\">",
+              "target": [
+                "#accordion-panel-25"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#0206a8",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 13.17,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 13.17"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<a class=\"chakra-link xodo-docx-word-editor-link css-g3voci\" id=\"next-link-no-title\" data-testid=\"xodo-docx-word-editor-link\" href=\"/docx-word-editor\">online DOCX editor</a>",
+              "target": [
+                ".xodo-docx-word-editor-link"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#485056",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 8.21,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 8.21"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<div class=\"css-ynmvqj\">How to convert PDF to Word on Mac?</div>",
+              "target": [
+                "#accordion-button-26 > .css-ynmvqj"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#485056",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 8.21,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 8.21"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<div class=\"css-ynmvqj\">How to edit a PDF in Word?</div>",
+              "target": [
+                "#accordion-button-27 > .css-ynmvqj"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#485056",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 8.21,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 8.21"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<div class=\"css-ynmvqj\">How to convert PDF to Word without Adobe?</div>",
+              "target": [
+                "#accordion-button-28 > .css-ynmvqj"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#485056",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 8.21,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 8.21"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<div class=\"css-ynmvqj\">How do I convert scanned PDF to Word?</div>",
+              "target": [
+                "#accordion-button-29 > .css-ynmvqj"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#485056",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 8.21,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 8.21"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<div class=\"css-ynmvqj\">What technology powers Xodo’s PDF to Word Converter?</div>",
+              "target": [
+                "#accordion-button-30 > .css-ynmvqj"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#ffffff",
+                    "bgColor": "#00083d",
+                    "contrastRatio": 19.05,
+                    "fontSize": "24.0pt (32px)",
+                    "fontWeight": "bold",
+                    "expectedContrastRatio": "3:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 19.05"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<h2 class=\"chakra-text css-1izkbzt\">Get More Work Done with 30+ Online PDF Tools</h2>",
+              "target": [
+                ".css-1izkbzt"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#00e2ea",
+                    "bgColor": "#003460",
+                    "contrastRatio": 7.87,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 7.87"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<button type=\"button\" class=\"chakra-button css-1hjprz3\" id=\"tool-list-from_pdf\">Convert from PDF</button>",
+              "target": [
+                "#tool-list-from_pdf"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#ffffff",
+                    "bgColor": "#00083d",
+                    "contrastRatio": 19.05,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 19.05"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<button type=\"button\" class=\"chakra-button css-t96is9\" id=\"tool-list-to_pdf\">Convert to PDF</button>",
+              "target": [
+                "#tool-list-to_pdf"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#ffffff",
+                    "bgColor": "#00083d",
+                    "contrastRatio": 19.05,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 19.05"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<button type=\"button\" class=\"chakra-button css-t96is9\" id=\"tool-list-organize\">Organize</button>",
+              "target": [
+                "#tool-list-organize"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#ffffff",
+                    "bgColor": "#00083d",
+                    "contrastRatio": 19.05,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 19.05"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<button type=\"button\" class=\"chakra-button css-t96is9\" id=\"tool-list-edit\">Edit</button>",
+              "target": [
+                "#tool-list-edit"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#ffffff",
+                    "bgColor": "#00083d",
+                    "contrastRatio": 19.05,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 19.05"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<button type=\"button\" class=\"chakra-button css-t96is9\" id=\"tool-list-view\">View</button>",
+              "target": [
+                "#tool-list-view"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#343a40",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 11.5,
+                    "fontSize": "18.0pt (24px)",
+                    "fontWeight": "bold",
+                    "expectedContrastRatio": "3:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 11.5"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<p class=\"chakra-text css-apq3f8\">Select a tool to try it out</p>",
+              "target": [
+                ".css-apq3f8"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#343a40",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 11.5,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "bold",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 11.5"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<p class=\"chakra-text css-14bm7dz\" id=\"tool-list-options-text-pdf_to_word\">PDF to Word</p>",
+              "target": [
+                "#tool-list-options-text-pdf_to_word"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#343a40",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 11.5,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "bold",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 11.5"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<p class=\"chakra-text css-14bm7dz\" id=\"tool-list-options-text-pdf_to_excel\">PDF to Excel</p>",
+              "target": [
+                "#tool-list-options-text-pdf_to_excel"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#343a40",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 11.5,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "bold",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 11.5"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<p class=\"chakra-text css-14bm7dz\" id=\"tool-list-options-text-pdf_to_html\">PDF to HTML</p>",
+              "target": [
+                "#tool-list-options-text-pdf_to_html"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#343a40",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 11.5,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "bold",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 11.5"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<p class=\"chakra-text css-14bm7dz\" id=\"tool-list-options-text-pdf_to_text\">PDF to Text</p>",
+              "target": [
+                "#tool-list-options-text-pdf_to_text"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#343a40",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 11.5,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "bold",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 11.5"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<p class=\"chakra-text css-14bm7dz\" id=\"tool-list-options-text-pdf_to_pdfa\">PDF to PDF/A</p>",
+              "target": [
+                "#tool-list-options-text-pdf_to_pdfa"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#343a40",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 11.5,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "bold",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 11.5"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<p class=\"chakra-text css-14bm7dz\" id=\"tool-list-options-text-pdf_to_powerpoint\">PDF to PowerPoint</p>",
+              "target": [
+                "#tool-list-options-text-pdf_to_powerpoint"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#343a40",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 11.5,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "bold",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 11.5"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<p class=\"chakra-text css-14bm7dz\" id=\"tool-list-options-text-pdf_to_jpg\">PDF to JPG</p>",
+              "target": [
+                "#tool-list-options-text-pdf_to_jpg"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#343a40",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 11.5,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "bold",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 11.5"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<p class=\"chakra-text css-14bm7dz\" id=\"tool-list-options-text-heic_to_jpg\">HEIC to JPG</p>",
+              "target": [
+                "#tool-list-options-text-heic_to_jpg"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#343a40",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 11.5,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "bold",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 11.5"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<p class=\"chakra-text css-14bm7dz\" id=\"tool-list-options-text-pdf_to_png\">PDF to PNG</p>",
+              "target": [
+                "#tool-list-options-text-pdf_to_png"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#343a40",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 11.5,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "bold",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 11.5"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<p class=\"chakra-text css-14bm7dz\" id=\"tool-list-options-text-heic_to_png\">HEIC to PNG</p>",
+              "target": [
+                "#tool-list-options-text-heic_to_png"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#334758",
+                    "bgColor": "#e8eff6",
+                    "contrastRatio": 8.29,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "bold",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 8.29"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<p class=\"chakra-text css-ygwv46\">Blog</p>",
+              "target": [
+                ".css-ygwv46"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#e8eff6",
+                    "contrastRatio": 14.07,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 14.07"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<a class=\"chakra-link footer-blog-How to Convert Bank Statement PDF to Excel css-sqoqo5\" id=\"next-link-no-title\" href=\"/blog/how-to-convert-bank-statement-pdf-to-excel\">How to Convert Bank Statement PDF to Excel</a>",
+              "target": [
+                ".Bank"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#e8eff6",
+                    "contrastRatio": 14.07,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 14.07"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<a class=\"chakra-link footer-blog-How to Edit a PDF without Adobe Acrobat css-sqoqo5\" id=\"next-link-no-title\" href=\"/blog/how-to-edit-a-pdf-without-adobe-acrobat\">How to Edit a PDF without Adobe Acrobat</a>",
+              "target": [
+                ".Edit"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#e8eff6",
+                    "contrastRatio": 14.07,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 14.07"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<a class=\"chakra-link footer-blog-How to Secure a PDF Before Sharing css-sqoqo5\" id=\"next-link-no-title\" href=\"/blog/how-to-secure-a-pdf-before-sharing\">How to Secure a PDF Before Sharing</a>",
+              "target": [
+                ".Secure"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#e8eff6",
+                    "contrastRatio": 14.07,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 14.07"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<a class=\"chakra-link footer-blog-How to Fill Out PDF Forms Online Without Printing or Scanning css-sqoqo5\" id=\"next-link-no-title\" href=\"/blog/how-to-fill-out-pdf-forms-online-without-printing-or-scanning\">How to Fill Out PDF Forms Online Without Printing or Scanning</a>",
+              "target": [
+                ".Fill"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#e8eff6",
+                    "contrastRatio": 14.07,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 14.07"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<a class=\"chakra-link footer-blog-How to Convert PDF to HTML on Desktop css-sqoqo5\" id=\"next-link-no-title\" href=\"/blog/how-to-convert-pdf-to-html-on-desktop\">How to Convert PDF to HTML on Desktop</a>",
+              "target": [
+                ".HTML"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#334758",
+                    "bgColor": "#e8eff6",
+                    "contrastRatio": 8.29,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "bold",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 8.29"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<p class=\"chakra-text css-gkg286\">Products</p>",
+              "target": [
+                ".css-us59mg.chakra-stack:nth-child(2) > .css-gkg286.chakra-text"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#e8eff6",
+                    "contrastRatio": 14.07,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 14.07"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<a class=\"chakra-link footer-products-xodo_web css-sqoqo5\" id=\"next-link-no-title\" href=\"/tools\">Xodo Web</a>",
+              "target": [
+                ".footer-products-xodo_web"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#e8eff6",
+                    "contrastRatio": 14.07,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 14.07"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<a class=\"chakra-link footer-products-xodo_pdf_studio css-sqoqo5\" id=\"next-link-no-title\" href=\"/pdf-studio\">Xodo PDF Studio Desktop</a>",
+              "target": [
+                ".footer-products-xodo_pdf_studio"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#e8eff6",
+                    "contrastRatio": 14.07,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 14.07"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<a class=\"chakra-link footer-products-xodo_sign css-sqoqo5\" id=\"next-link-no-title\" href=\"https://eversign.com/\">Xodo Sign</a>",
+              "target": [
+                ".footer-products-xodo_sign"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#e8eff6",
+                    "contrastRatio": 14.07,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 14.07"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<a class=\"chakra-link footer-products-xodo_pdf_reader css-sqoqo5\" id=\"next-link-no-title\" href=\"/pdf-studio/free-pdf-reader\">Xodo PDF Reader</a>",
+              "target": [
+                ".footer-products-xodo_pdf_reader"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#e8eff6",
+                    "contrastRatio": 14.07,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 14.07"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<a class=\"chakra-link footer-products-apps_and_integration css-sqoqo5\" id=\"next-link-no-title\" href=\"/integration\">Apps &amp; Integrations</a>",
+              "target": [
+                ".footer-products-apps_and_integration"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#e8eff6",
+                    "contrastRatio": 14.07,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 14.07"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<a class=\"chakra-link footer-products-pricing_and_plan css-sqoqo5\" id=\"next-link-no-title\" href=\"/pricing\">Plans &amp; Pricing</a>",
+              "target": [
+                ".footer-products-pricing_and_plan"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#334758",
+                    "bgColor": "#e8eff6",
+                    "contrastRatio": 8.29,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "bold",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 8.29"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<p class=\"chakra-text css-gkg286\">Company</p>",
+              "target": [
+                ".css-us59mg.chakra-stack:nth-child(3) > .css-gkg286.chakra-text"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#e8eff6",
+                    "contrastRatio": 14.07,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 14.07"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<a class=\"chakra-link footer-company-about css-sqoqo5\" id=\"next-link-no-title\" href=\"/about\">About</a>",
+              "target": [
+                ".footer-company-about"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#e8eff6",
+                    "contrastRatio": 14.07,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 14.07"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<a class=\"chakra-link footer-company-support css-sqoqo5\" id=\"next-link-no-title\" data-testid=\"footer-support-link\" href=\"https://feedback.xodo.com/support/home\">Support Portal</a>",
+              "target": [
+                ".footer-company-support"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#e8eff6",
+                    "contrastRatio": 14.07,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 14.07"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<a class=\"chakra-link footer-company-technology css-sqoqo5\" id=\"next-link-no-title\" href=\"/technologies\">Technology</a>",
+              "target": [
+                ".footer-company-technology"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#485056",
+                    "bgColor": "#e8eff6",
+                    "contrastRatio": 7.08,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 7.08"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<div class=\"css-60819w\">",
+              "target": [
+                ".css-60819w"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#485056",
+                    "bgColor": "#e8eff6",
+                    "contrastRatio": 7.08,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 7.08"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<a class=\"chakra-link footer.powered_by_short css-1tbzgck\" id=\"next-link-no-title\" href=\"https://apryse.com\">Apryse</a>",
+              "target": [
+                ".footer\\.powered_by_short"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#485056",
+                    "bgColor": "#e8eff6",
+                    "contrastRatio": 7.08,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 7.08"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<a class=\"chakra-link footer.powered_by_pdf_sdk css-1tbzgck\" id=\"next-link-no-title\" href=\"https://apryse.com/products/core-sdk/pdf\">PDF SDK</a>",
+              "target": [
+                ".footer\\.powered_by_pdf_sdk"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#334758",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 9.61,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "bold",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 9.61"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<select id=\"language-select\" class=\"chakra-select css-l8yci6\">",
+              "target": [
+                "#language-select"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#e8eff6",
+                    "contrastRatio": 14.07,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 14.07"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<a class=\"chakra-link footer.terms css-1tbzgck\" id=\"next-link-no-title\" href=\"/legal\">Terms of Use</a>",
+              "target": [
+                ".footer\\.terms"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#e8eff6",
+                    "contrastRatio": 14.07,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 14.07"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<a class=\"chakra-link footer.privacy css-1tbzgck\" id=\"next-link-no-title\" href=\"https://apryse.com/privacy\">Privacy Policy</a>",
+              "target": [
+                ".footer\\.privacy"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#485056",
+                    "bgColor": "#e8eff6",
+                    "contrastRatio": 7.08,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 7.08"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<span class=\"chakra-text css-ruzynj\">Help Us Improve Xodo</span>",
+              "target": [
+                ".css-ruzynj"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#e8eff6",
+                    "contrastRatio": 14.07,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 14.07"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<a class=\"chakra-link footer.contact css-1tbzgck\" id=\"next-link-no-title\" href=\"https://feedback.xodo.com/support/home\">Contact Us</a>",
+              "target": [
+                ".footer\\.contact"
+              ]
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#1a202c",
+                    "bgColor": "#e8eff6",
+                    "contrastRatio": 14.07,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has sufficient color contrast of 14.07"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": null,
+              "html": "<a class=\"chakra-link footer.data_processing_agreement css-1tbzgck\" id=\"next-link-no-title\" href=\"/data-processing-agreement\">Data Processing Agreement</a>",
+              "target": [
+                ".footer\\.data_processing_agreement"
+              ]
+            }
+          ]
+        }
+      ],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=axeAPI",
+          "nodes": [
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "contrastRatio": 0,
+                    "fontSize": "12.0pt (16px)",
+                    "fontWeight": "normal",
+                    "messageKey": "elmPartiallyObscuring",
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element's background color could not be determined because it partially overlaps other elements"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": "serious",
+              "html": "<span id=\"2c58611f-e7c6-43d2-af81-0f61bf39bf94__label\" class=\" osano-cm-content__message osano-cm-message \">",
+              "target": [
+                "#\\32 c58611f-e7c6-43d2-af81-0f61bf39bf94__label"
+              ],
+              "failureSummary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+            }
+          ]
+        }
+      ],
+      "inapplicable": [
+        {
+          "id": "valid-lang",
+          "impact": null,
+          "tags": [
+            "cat.language",
+            "wcag2aa",
+            "wcag312",
+            "TTv5",
+            "TT11.b",
+            "EN-301-549",
+            "EN-9.3.1.2",
+            "ACT",
+            "RGAAv4",
+            "RGAA-8.8.1"
+          ],
+          "description": "Ensure lang attributes have valid values",
+          "help": "lang attribute must have a valid value",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/valid-lang?application=axeAPI",
+          "nodes": []
+        }
+      ],
+      "url": "https://xodo.com/pdf-to-word-converter",
+      "timestamp": "2026-03-28T10:45:01.047Z",
+      "score": 50,
+      "summary": {
+        "critical": 0,
+        "serious": 1,
+        "moderate": 1,
+        "minor": 0,
+        "total": 2
+      },
+      "success": true
+    },
+    "standards": [
+      "wcag2aa"
+    ]
+  }
+]

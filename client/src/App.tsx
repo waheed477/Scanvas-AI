@@ -15,7 +15,6 @@ import NotFound from "@/pages/not-found";
 import PrivacyPolicy from "@/pages/legal/privacy";
 import TermsOfService from "@/pages/legal/terms";
 import { CookieConsent } from "@/components/CookieConsent";
-import { ProfessionalBackground } from "@/components/ProfessionalBackground";
 
 function Router() {
   return (
@@ -38,9 +37,13 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           <div className="min-h-screen bg-white relative">
-            <ProfessionalBackground />
+            {/* Background Orbs - Subtle */}
+            <div className="fixed inset-0 pointer-events-none">
+              <div className="absolute top-0 right-0 w-96 h-96 bg-[#334155]/5 rounded-full blur-3xl" />
+              <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#64748b]/5 rounded-full blur-3xl" />
+            </div>
             <Navbar />
-            <main className="relative flex-grow">
+            <main className="relative">
               <Router />
             </main>
             <Footer />

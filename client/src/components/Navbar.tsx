@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react"; // Removed Sparkles import
+import { Menu, X, Eye } from "lucide-react";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useSession, signIn, signOut } from "next-auth/react";
@@ -20,19 +20,28 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-[#e2e8f0] shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
+          {/* Logo with Eye Icon - Accessibility Symbol */}
           <Link href="/">
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               className="flex items-center gap-2 cursor-pointer group"
             >
-              <div className="w-8 h-8 rounded-lg bg-[#334155] flex items-center justify-center shadow-md">
-                <span className="text-white font-bold text-sm">S</span>
+              <div className="relative">
+                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#334155] to-[#5b6e8c] flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300 group-hover:scale-105">
+                  <Eye className="w-5 h-5 text-white" />
+                </div>
+                {/* Subtle ring effect */}
+                <div className="absolute inset-0 rounded-xl bg-[#334155]/20 blur-sm -z-10 group-hover:blur-md transition-all" />
               </div>
-              <span className="text-xl font-bold text-[#334155]">
-                Scanvas
-              </span>
+              <div className="flex flex-col items-start">
+                <span className="text-xl font-bold text-[#334155] leading-tight">
+                  Scanvas
+                </span>
+                <span className="text-[10px] text-[#64748b] -mt-1 tracking-wide">
+                  Accessibility First
+                </span>
+              </div>
             </motion.div>
           </Link>
 
@@ -52,7 +61,7 @@ export default function Navbar() {
                   {location === item.path && (
                     <motion.div
                       layoutId="activeNav"
-                      className="absolute bottom-0 left-2 right-2 h-0.5 bg-[#334155] rounded-full"
+                      className="absolute bottom-0 left-2 right-2 h-0.5 bg-gradient-to-r from-[#334155] to-[#5b6e8c] rounded-full"
                       initial={false}
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
@@ -74,7 +83,7 @@ export default function Navbar() {
                 <Button
                   variant="outline"
                   onClick={() => signOut()}
-                  className="rounded-full border-[#334155]/20 text-[#334155] hover:bg-[#334155] hover:text-white"
+                  className="rounded-full border-[#e2e8f0] text-[#334155] hover:bg-[#f8fafc] hover:text-[#334155]"
                 >
                   Sign Out
                 </Button>
@@ -82,7 +91,7 @@ export default function Navbar() {
             ) : (
               <Button
                 onClick={() => signIn('google', { callbackUrl: 'http://localhost:3000' })}
-                className="rounded-full bg-[#334155] hover:bg-[#5b6e8c] text-white"
+                className="rounded-full bg-[#334155] text-white hover:bg-[#5b6e8c]"
               >
                 Sign In
               </Button>
@@ -142,7 +151,7 @@ export default function Navbar() {
               ) : (
                 <Button
                   onClick={() => signIn('google', { callbackUrl: 'http://localhost:3000' })}
-                  className="w-full bg-[#334155] hover:bg-[#5b6e8c] text-white"
+                  className="w-full bg-[#334155] text-white hover:bg-[#5b6e8c]"
                 >
                   Sign In
                 </Button>

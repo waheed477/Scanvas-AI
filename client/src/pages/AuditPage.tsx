@@ -10,7 +10,6 @@ import {
   ArrowLeft, 
   Search, 
   Zap, 
-  Sparkles, 
   Shield, 
   BarChart,
   Globe,
@@ -54,36 +53,31 @@ export default function AuditPage() {
       label: "Audits Today", 
       value: auditsToday.toString(), 
       icon: Clock, 
-      color: "blue",
-      real: true 
+      color: "blue"
     },
     { 
       label: "Issues Found", 
       value: totalIssues.toLocaleString(), 
       icon: AlertCircle, 
-      color: "red",
-      real: true 
+      color: "red"
     },
     { 
       label: "Avg Score", 
       value: avgScore.toString(), 
       icon: TrendingUp, 
-      color: avgScore >= 70 ? "green" : avgScore >= 50 ? "yellow" : "red",
-      real: true 
+      color: avgScore >= 70 ? "green" : avgScore >= 50 ? "yellow" : "red"
     },
     { 
       label: "Total Scans", 
       value: recentAudits?.length.toLocaleString() || "0", 
       icon: Globe, 
-      color: "purple",
-      real: true 
+      color: "purple"
     }
   ];
 
   const handleAudit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validate URL
     if (!url || url.trim() === '') {
       toast({
         title: "❌ URL Required",
@@ -95,13 +89,11 @@ export default function AuditPage() {
     
     console.log('Starting audit with URL:', url);
     
-    // Format URL if needed
     let formattedUrl = url.trim();
     if (!formattedUrl.startsWith("http://") && !formattedUrl.startsWith("https://")) {
       formattedUrl = `https://${formattedUrl}`;
     }
 
-    // Validate URL format
     try {
       new URL(formattedUrl);
     } catch {
@@ -128,7 +120,6 @@ export default function AuditPage() {
     }
   };
 
-  // Quick example URLs
   const exampleUrls = [
     { url: "example.com", label: "Example (Basic)", category: "test" },
     { url: "webaim.org", label: "WebAIM (Educational)", category: "educational" },
@@ -145,14 +136,14 @@ export default function AuditPage() {
     : exampleUrls.filter(ex => ex.category === exampleCategory);
 
   return (
-<div className="min-h-screen bg-white">
-        <div className="container max-w-6xl mx-auto">
+    <div className="min-h-screen bg-white py-4 md:py-8 px-3 md:px-4">
+      <div className="container max-w-6xl mx-auto">
         {/* Header with back button */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 md:mb-8">
           <Button
             variant="ghost"
             onClick={() => setLocation("/")}
-            className="gap-2 text-[#475569] dark:text-[#94a3b8] hover:text-[#2563eb] dark:hover:text-[#7c3aed] w-fit"
+            className="gap-2 text-[#475569] hover:text-[#334155] w-fit"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Home
@@ -180,30 +171,30 @@ export default function AuditPage() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-8 md:mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-gradient-to-r from-[#2563eb]/10 to-[#7c3aed]/10 text-[#2563eb] dark:text-[#7c3aed] text-xs md:text-sm font-medium mb-4 md:mb-6 border border-[#2563eb]/20">
+          <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-gradient-to-r from-[#334155]/10 to-[#64748b]/10 text-[#334155] text-xs md:text-sm font-medium mb-4 md:mb-6 border border-[#e2e8f0]">
             <Zap className="w-3 h-3 md:w-4 md:h-4" />
             <span>New Accessibility Scan</span>
           </div>
           
           <h1 className="text-3xl md:text-5xl font-bold mb-3 md:mb-4 px-2">
-            <span className="bg-gradient-to-r from-[#0f172a] to-[#2563eb] dark:from-white dark:to-[#7c3aed] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#111827] to-[#334155] bg-clip-text text-transparent">
               Start a New Audit
             </span>
           </h1>
           
-          <p className="text-sm md:text-lg text-[#475569] dark:text-[#94a3b8] max-w-2xl mx-auto px-4">
+          <p className="text-sm md:text-lg text-[#475569] max-w-2xl mx-auto px-4">
             Enter any website URL to get instant accessibility insights and recommendations
           </p>
         </motion.div>
 
         {/* Main Content Tabs */}
         <Tabs defaultValue="single" className="space-y-6 md:space-y-8">
-          <TabsList className="grid w-full max-w-xs md:max-w-md mx-auto grid-cols-2">
-            <TabsTrigger value="single" className="gap-1 md:gap-2 text-xs md:text-sm">
+          <TabsList className="grid w-full max-w-xs md:max-w-md mx-auto grid-cols-2 bg-[#f1f5f9]">
+            <TabsTrigger value="single" className="gap-1 md:gap-2 text-xs md:text-sm data-[state=active]:bg-white">
               <Search className="w-3 h-3 md:w-4 md:h-4" />
               <span>Single URL</span>
             </TabsTrigger>
-            <TabsTrigger value="batch" className="gap-1 md:gap-2 text-xs md:text-sm">
+            <TabsTrigger value="batch" className="gap-1 md:gap-2 text-xs md:text-sm data-[state=active]:bg-white">
               <BarChart className="w-3 h-3 md:w-4 md:h-4" />
               <span>Batch Scan</span>
             </TabsTrigger>
@@ -211,11 +202,11 @@ export default function AuditPage() {
 
           {/* Single URL Scan */}
           <TabsContent value="single">
-            <Card className="border-[#e2e8f0] dark:border-[#334155] bg-white/80 dark:bg-[#1e293b]/80 backdrop-blur-sm">
+            <Card className="border-[#e2e8f0] bg-[#f8fafc]">
               <CardContent className="p-4 md:p-8">
                 <form onSubmit={handleAudit} className="space-y-4 md:space-y-6">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-[#0f172a] dark:text-white block">
+                    <label className="text-sm font-medium text-[#111827] block">
                       Website URL
                     </label>
                     <div className="flex flex-col sm:flex-row gap-3">
@@ -225,14 +216,14 @@ export default function AuditPage() {
                           placeholder="Enter website URL (e.g., example.com)"
                           value={url}
                           onChange={(e) => setUrl(e.target.value)}
-                          className="pl-9 md:pl-11 h-12 md:h-14 text-sm md:text-base border-[#e2e8f0] dark:border-[#334155] focus-visible:ring-2 focus-visible:ring-[#2563eb]/30"
+                          className="pl-9 md:pl-11 h-12 md:h-14 text-sm md:text-base border-[#e2e8f0] focus-visible:ring-2 focus-visible:ring-[#334155]/30"
                           disabled={createAudit.isPending}
                         />
                       </div>
                       <Button
                         type="submit"
                         size="lg"
-                        className="h-12 md:h-14 px-4 md:px-8 bg-gradient-to-r from-[#2563eb] to-[#7c3aed] text-white hover:from-[#1d4ed8] hover:to-[#6d28d9] shadow-lg disabled:opacity-50 whitespace-nowrap text-sm md:text-base"
+                        className="h-12 md:h-14 px-4 md:px-8 bg-[#334155] text-white hover:bg-[#5b6e8c] shadow-lg disabled:opacity-50 whitespace-nowrap text-sm md:text-base"
                         disabled={createAudit.isPending}
                       >
                         {createAudit.isPending ? (
@@ -254,7 +245,7 @@ export default function AuditPage() {
                       <select
                         value={exampleCategory}
                         onChange={(e) => setExampleCategory(e.target.value)}
-                        className="text-xs md:text-sm bg-transparent border border-[#e2e8f0] dark:border-[#334155] rounded px-2 py-1"
+                        className="text-xs md:text-sm bg-transparent border border-[#e2e8f0] rounded px-2 py-1"
                       >
                         <option value="all">All</option>
                         <option value="test">Test Sites</option>
@@ -270,7 +261,7 @@ export default function AuditPage() {
                           key={example.url}
                           type="button"
                           onClick={() => setUrl(example.url)}
-                          className="px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-[#f8fafc] dark:bg-[#0f172a] border border-[#e2e8f0] dark:border-[#334155] text-xs md:text-sm text-[#475569] dark:text-[#94a3b8] hover:text-[#2563eb] dark:hover:text-[#7c3aed] hover:border-[#2563eb]/50 transition-colors"
+                          className="px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-white border border-[#e2e8f0] text-xs md:text-sm text-[#475569] hover:text-[#334155] hover:border-[#334155]/50 transition-colors"
                         >
                           {example.label}
                         </button>
@@ -297,12 +288,12 @@ export default function AuditPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card className="border-[#e2e8f0] dark:border-[#334155] hover:shadow-md transition-all">
+              <Card className="border-[#e2e8f0] bg-[#f8fafc] hover:shadow-md transition-all">
                 <CardContent className="p-3 md:p-4 text-center">
-                  <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full bg-${stat.color}-100 dark:bg-${stat.color}-950/30 flex items-center justify-center mx-auto mb-2 md:mb-3`}>
-                    <stat.icon className={`w-4 h-4 md:w-5 md:h-5 text-${stat.color}-600 dark:text-${stat.color}-400`} />
+                  <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full bg-${stat.color}-100 flex items-center justify-center mx-auto mb-2 md:mb-3`}>
+                    <stat.icon className={`w-4 h-4 md:w-5 md:h-5 text-${stat.color}-600`} />
                   </div>
-                  <p className="text-lg md:text-2xl font-bold text-[#0f172a] dark:text-white">
+                  <p className="text-lg md:text-2xl font-bold text-[#111827]">
                     {auditsLoading ? (
                       <Loader2 className="w-4 h-4 animate-spin mx-auto" />
                     ) : (
@@ -320,7 +311,7 @@ export default function AuditPage() {
         {recentAudits && recentAudits.length > 0 && (
           <div className="mt-8 md:mt-12">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg md:text-xl font-semibold text-[#0f172a] dark:text-white">
+              <h2 className="text-lg md:text-xl font-semibold text-[#111827]">
                 Recent Activity
               </h2>
               <Button
@@ -338,20 +329,20 @@ export default function AuditPage() {
                 <div
                   key={audit.id}
                   onClick={() => setLocation(`/audit/${audit.id}`)}
-                  className="p-3 md:p-4 bg-white dark:bg-[#1e293b] rounded-lg border border-[#e2e8f0] dark:border-[#334155] hover:shadow-md transition-all cursor-pointer"
+                  className="p-3 md:p-4 bg-white rounded-lg border border-[#e2e8f0] hover:shadow-md transition-all cursor-pointer"
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3 min-w-0">
                       <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-xs md:text-sm font-bold flex-shrink-0 ${
-                        audit.score >= 90 ? "bg-green-100 text-green-700 dark:bg-green-950/30 dark:text-green-400" :
-                        audit.score >= 70 ? "bg-blue-100 text-blue-700 dark:bg-blue-950/30 dark:text-blue-400" :
-                        audit.score >= 50 ? "bg-yellow-100 text-yellow-700 dark:bg-yellow-950/30 dark:text-yellow-400" :
-                        "bg-red-100 text-red-700 dark:bg-red-950/30 dark:text-red-400"
+                        audit.score >= 90 ? "bg-emerald-100 text-emerald-700" :
+                        audit.score >= 70 ? "bg-blue-100 text-blue-700" :
+                        audit.score >= 50 ? "bg-yellow-100 text-yellow-700" :
+                        "bg-red-100 text-red-700"
                       }`}>
                         {audit.score}
                       </div>
                       <div className="min-w-0">
-                        <p className="font-medium text-sm md:text-base truncate">
+                        <p className="font-medium text-sm md:text-base truncate text-[#111827]">
                           {audit.url}
                         </p>
                         <p className="text-xs text-[#64748b]">
@@ -359,7 +350,7 @@ export default function AuditPage() {
                         </p>
                       </div>
                     </div>
-                    <div className="text-xs md:text-sm text-[#2563eb] dark:text-[#7c3aed] flex-shrink-0">
+                    <div className="text-xs md:text-sm text-[#334155] flex-shrink-0">
                       {audit.summary?.total || 0} issues
                     </div>
                   </div>
@@ -371,7 +362,7 @@ export default function AuditPage() {
 
         {/* Features Overview */}
         <div className="mt-8 md:mt-16">
-          <h2 className="text-xl md:text-2xl font-bold text-center mb-6 md:mb-8 bg-gradient-to-r from-[#0f172a] to-[#2563eb] dark:from-white dark:to-[#7c3aed] bg-clip-text text-transparent px-2">
+          <h2 className="text-xl md:text-2xl font-bold text-center mb-6 md:mb-8 bg-gradient-to-r from-[#111827] to-[#334155] bg-clip-text text-transparent px-2">
             Why Use Scanvas?
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
@@ -392,15 +383,15 @@ export default function AuditPage() {
                 desc: "Code snippets and step-by-step remediation guidance"
               }
             ].map((feature, index) => (
-              <Card key={index} className="border-[#e2e8f0] dark:border-[#334155] hover:shadow-lg transition-all">
+              <Card key={index} className="border-[#e2e8f0] bg-[#f8fafc] hover:shadow-lg transition-all">
                 <CardContent className="p-4 md:p-6 text-center">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#2563eb]/10 dark:bg-[#7c3aed]/10 flex items-center justify-center mx-auto mb-3 md:mb-4">
-                    <div className="text-[#2563eb] dark:text-[#7c3aed]">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#334155]/10 flex items-center justify-center mx-auto mb-3 md:mb-4">
+                    <div className="text-[#334155]">
                       {feature.icon}
                     </div>
                   </div>
-                  <h3 className="font-semibold text-base md:text-lg mb-1 md:mb-2">{feature.title}</h3>
-                  <p className="text-xs md:text-sm text-[#475569] dark:text-[#94a3b8]">
+                  <h3 className="font-semibold text-base md:text-lg mb-1 md:mb-2 text-[#111827]">{feature.title}</h3>
+                  <p className="text-xs md:text-sm text-[#475569]">
                     {feature.desc}
                   </p>
                 </CardContent>

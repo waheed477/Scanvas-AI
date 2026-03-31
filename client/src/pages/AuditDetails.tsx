@@ -45,10 +45,10 @@ export default function AuditDetails() {
   // Guard condition
   if (!id || id === 'undefined') {
     return (
-<div className="min-h-screen bg-white">
-          <div className="text-center">
-          <Loader2 className="h-8 w-8 animate-spin text-[#2563eb] mx-auto mb-4" />
-          <p className="text-[#475569] dark:text-[#94a3b8]">Loading audit details...</p>
+      <div className="min-h-screen bg-white flex items-center justify-center p-4">
+        <div className="text-center">
+          <Loader2 className="h-8 w-8 animate-spin text-[#334155] mx-auto mb-4" />
+          <p className="text-[#475569]">Loading audit details...</p>
         </div>
       </div>
     );
@@ -72,10 +72,10 @@ export default function AuditDetails() {
 
   if (isLoading) {
     return (
-<div className="min-h-screen bg-white">
-          <div className="text-center">
-          <Loader2 className="h-8 w-8 animate-spin text-[#2563eb] mx-auto mb-4" />
-          <p className="text-[#475569] dark:text-[#94a3b8]">Loading audit details...</p>
+      <div className="min-h-screen bg-white flex items-center justify-center p-4">
+        <div className="text-center">
+          <Loader2 className="h-8 w-8 animate-spin text-[#334155] mx-auto mb-4" />
+          <p className="text-[#475569]">Loading audit details...</p>
         </div>
       </div>
     );
@@ -84,12 +84,12 @@ export default function AuditDetails() {
   if (error || !audit) {
     console.error('Audit fetch error:', error);
     return (
-<div className="min-h-screen bg-white">
-          <div className="text-center max-w-md w-full">
+      <div className="min-h-screen bg-white flex items-center justify-center p-4">
+        <div className="text-center max-w-md w-full">
           <ServerCrash className="h-16 w-16 text-red-500 mx-auto mb-4" />
-          <h2 className="text-2xl font-bold text-[#0f172a] dark:text-white mb-2">Audit not found</h2>
-          <p className="text-[#475569] dark:text-[#94a3b8] mb-4">The audit you're looking for doesn't exist or couldn't be loaded.</p>
-          <Button onClick={() => setLocation("/")} className="w-full sm:w-auto">Go Home</Button>
+          <h2 className="text-2xl font-bold text-[#111827] mb-2">Audit not found</h2>
+          <p className="text-[#475569] mb-4">The audit you're looking for doesn't exist or couldn't be loaded.</p>
+          <Button onClick={() => setLocation("/")} className="w-full sm:w-auto bg-[#334155] text-white hover:bg-[#5b6e8c]">Go Home</Button>
         </div>
       </div>
     );
@@ -142,9 +142,8 @@ export default function AuditDetails() {
     };
   };
 
-  // Get error message based on type - Updated version with better error detection
+  // Get error message based on type
   const getErrorMessage = (error: string) => {
-    // Check for timeout errors
     if (error.includes('Navigation timeout') || error.includes('timeout')) {
       return {
         title: "Scan Timeout",
@@ -153,7 +152,6 @@ export default function AuditDetails() {
         action: "Try scanning during off-peak hours or check if the site is accessible."
       };
     }
-    // Check for website unreachable errors
     if (error.includes('Could not load website') || error.includes('ERR_NAME_NOT_RESOLVED') || error.includes('ENOTFOUND')) {
       return {
         title: "Website Unreachable",
@@ -162,7 +160,6 @@ export default function AuditDetails() {
         action: "Try opening the website manually to check if it's accessible."
       };
     }
-    // Check for bot protection or JavaScript-heavy sites
     if (error.includes('window') || error.includes('document')) {
       return {
         title: "Website Cannot Be Scanned Automatically",
@@ -171,7 +168,6 @@ export default function AuditDetails() {
         action: "Try opening the website manually in a new tab."
       };
     }
-    // Default error message for other cases
     return {
       title: "Scan Failed",
       message: error || "We couldn't complete the accessibility scan for this website.",
@@ -201,20 +197,20 @@ export default function AuditDetails() {
   );
 
   return (
-<div className="min-h-screen bg-white">
-        <div className="container max-w-6xl mx-auto">
+    <div className="min-h-screen bg-white py-4 md:py-8 px-3 md:px-4">
+      <div className="container max-w-6xl mx-auto">
         {/* Header with back button and responsive actions */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 md:mb-6">
           <Button
             variant="ghost"
             onClick={() => setLocation("/history")}
-            className="gap-2 text-[#475569] dark:text-[#94a3b8] hover:text-[#2563eb] dark:hover:text-[#7c3aed] w-fit"
+            className="gap-2 text-[#475569] hover:text-[#334155] w-fit"
           >
             <ArrowLeft className="w-4 h-4" />
             <span className="text-sm md:text-base">Back to History</span>
           </Button>
           
-          {/* Desktop action buttons - hidden on mobile */}
+          {/* Desktop action buttons */}
           {!isMobile && (
             <div className="flex items-center gap-2 md:gap-3 flex-wrap">
               <ShareReport auditId={id} />
@@ -254,12 +250,12 @@ export default function AuditDetails() {
         {showLoading && (
           <LoadingBar 
             duration={2}
-            color="from-[#2563eb] to-[#7c3aed]"
+            color="from-[#334155] to-[#5b6e8c]"
             onComplete={() => console.log('Loading complete')}
           />
         )}
 
-        {/* Main Content - Responsive Grid */}
+        {/* Main Content */}
         <div className="audit-report-content">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
             {/* Left Column - Score and Summary */}
@@ -269,22 +265,21 @@ export default function AuditDetails() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
               >
-                <Card className="border-[#e2e8f0] dark:border-[#334155] bg-white dark:bg-[#1e293b]">
+                <Card className="border-[#e2e8f0] bg-[#f8fafc]">
                   <CardContent className="p-4 md:p-6 flex flex-col items-center">
                     {scanError ? (
-                      // Show error state in score card - responsive
                       <div className="text-center py-4">
-                        <div className="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 rounded-full bg-amber-100 dark:bg-amber-950/30 flex items-center justify-center">
+                        <div className="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 rounded-full bg-amber-100 flex items-center justify-center">
                           {errorInfo?.icon}
                         </div>
-                        <h3 className="text-base md:text-lg font-semibold text-[#0f172a] dark:text-white mb-2">
+                        <h3 className="text-base md:text-lg font-semibold text-[#111827] mb-2">
                           {errorInfo?.title}
                         </h3>
-                        <p className="text-xs md:text-sm text-[#475569] dark:text-[#94a3b8] mb-4">
+                        <p className="text-xs md:text-sm text-[#475569] mb-4">
                           {errorInfo?.message}
                         </p>
-                        <div className="bg-amber-50 dark:bg-amber-950/20 p-3 md:p-4 rounded-lg text-left">
-                          <p className="text-xs md:text-sm text-amber-800 dark:text-amber-400 flex items-start gap-2">
+                        <div className="bg-amber-50 p-3 md:p-4 rounded-lg text-left">
+                          <p className="text-xs md:text-sm text-amber-800 flex items-start gap-2">
                             <Shield className="w-4 h-4 mt-0.5 flex-shrink-0" />
                             <span>{errorInfo?.action}</span>
                           </p>
@@ -295,16 +290,16 @@ export default function AuditDetails() {
                         <ScoreGauge score={audit.score} size={isMobile ? 120 : 160} />
                         
                         <div className="text-center mt-4">
-                          <p className="text-xs md:text-sm text-[#475569] dark:text-[#94a3b8]">
+                          <p className="text-xs md:text-sm text-[#475569]">
                             Based on {selectedStandards.length} compliance standards
                           </p>
                           
                           {/* Professional Score Message */}
-                          <div className="mt-3 p-3 bg-[#f8fafc] dark:bg-[#0f172a] rounded-lg border border-[#e2e8f0] dark:border-[#334155]">
-                            <Badge className={`mb-2 ${getScoreInfo(audit.score).color.split(' ')[0]} bg-opacity-10`}>
+                          <div className="mt-3 p-3 bg-white rounded-lg border border-[#e2e8f0]">
+                            <Badge className={`mb-2 ${getScoreInfo(audit.score).color} bg-opacity-10`}>
                               {getScoreInfo(audit.score).badge}
                             </Badge>
-                            <p className="text-xs md:text-sm text-[#0f172a] dark:text-white">
+                            <p className="text-xs md:text-sm text-[#111827]">
                               {getScoreInfo(audit.score).message}
                             </p>
                           </div>
@@ -312,38 +307,38 @@ export default function AuditDetails() {
                           {/* Standards badges */}
                           <div className="flex flex-wrap gap-1 justify-center mt-2">
                             {selectedStandards.map(standard => (
-                              <Badge key={standard} variant="outline" className="text-[10px] md:text-xs bg-[#f1f5f9] dark:bg-[#0f172a] text-[#475569] dark:text-[#94a3b8]">
+                              <Badge key={standard} variant="outline" className="text-[10px] md:text-xs bg-white text-[#475569] border-[#e2e8f0]">
                                 {standard.replace('wcag2', 'WCAG ').replace('aa', 'AA').replace('aaa', 'AAA').toUpperCase()}
                               </Badge>
                             ))}
                           </div>
                         </div>
 
-                        {/* Stats grid - responsive */}
+                        {/* Stats grid - Keep severity colors separate */}
                         <div className="w-full grid grid-cols-2 gap-2 md:gap-3 mt-4 md:mt-6">
-                          <div className="p-2 md:p-3 bg-red-50 dark:bg-red-950/20 rounded-lg text-center">
-                            <p className="text-[10px] md:text-xs text-red-600 dark:text-red-400">CRITICAL</p>
-                            <p className="text-base md:text-xl font-bold text-red-700 dark:text-red-300">{criticalCount}</p>
+                          <div className="p-2 md:p-3 bg-red-50 rounded-lg text-center">
+                            <p className="text-[10px] md:text-xs text-red-600">CRITICAL</p>
+                            <p className="text-base md:text-xl font-bold text-red-700">{criticalCount}</p>
                           </div>
-                          <div className="p-2 md:p-3 bg-orange-50 dark:bg-orange-950/20 rounded-lg text-center">
-                            <p className="text-[10px] md:text-xs text-orange-600 dark:text-orange-400">SERIOUS</p>
-                            <p className="text-base md:text-xl font-bold text-orange-700 dark:text-orange-300">{seriousCount}</p>
+                          <div className="p-2 md:p-3 bg-orange-50 rounded-lg text-center">
+                            <p className="text-[10px] md:text-xs text-orange-600">SERIOUS</p>
+                            <p className="text-base md:text-xl font-bold text-orange-700">{seriousCount}</p>
                           </div>
-                          <div className="p-2 md:p-3 bg-yellow-50 dark:bg-yellow-950/20 rounded-lg text-center">
-                            <p className="text-[10px] md:text-xs text-yellow-600 dark:text-yellow-400">MODERATE</p>
-                            <p className="text-base md:text-xl font-bold text-yellow-700 dark:text-yellow-300">{moderateCount}</p>
+                          <div className="p-2 md:p-3 bg-yellow-50 rounded-lg text-center">
+                            <p className="text-[10px] md:text-xs text-yellow-600">MODERATE</p>
+                            <p className="text-base md:text-xl font-bold text-yellow-700">{moderateCount}</p>
                           </div>
-                          <div className="p-2 md:p-3 bg-blue-50 dark:bg-blue-950/20 rounded-lg text-center">
-                            <p className="text-[10px] md:text-xs text-blue-600 dark:text-blue-400">MINOR</p>
-                            <p className="text-base md:text-xl font-bold text-blue-700 dark:text-blue-300">{minorCount}</p>
+                          <div className="p-2 md:p-3 bg-blue-50 rounded-lg text-center">
+                            <p className="text-[10px] md:text-xs text-blue-600">MINOR</p>
+                            <p className="text-base md:text-xl font-bold text-blue-700">{minorCount}</p>
                           </div>
                         </div>
                       </>
                     )}
 
-                    <div className="w-full mt-4 md:mt-6 pt-4 md:pt-6 border-t border-[#e2e8f0] dark:border-[#334155]">
-                      <p className="text-xs md:text-sm text-[#0f172a] dark:text-white font-medium">Audited on</p>
-                      <p className="text-xs md:text-sm text-[#475569] dark:text-[#94a3b8]">
+                    <div className="w-full mt-4 md:mt-6 pt-4 md:pt-6 border-t border-[#e2e8f0]">
+                      <p className="text-xs md:text-sm text-[#111827] font-medium">Audited on</p>
+                      <p className="text-xs md:text-sm text-[#475569]">
                         {audit.createdAt ? format(new Date(audit.createdAt), "dd/MM/yyyy 'at' h:mm a") : 'Date not available'}
                       </p>
                     </div>
@@ -357,28 +352,28 @@ export default function AuditDetails() {
               )}
             </div>
 
-            {/* Right Column - Tabs for Issues, Roadmap, Manual Testing, Vision and Preview */}
+            {/* Right Column - Tabs */}
             <div className="lg:col-span-2">
               <Tabs defaultValue={scanError ? "preview" : "issues"} value={activeTab} onValueChange={setActiveTab} className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <TabsList className="bg-[#f1f5f9] dark:bg-[#1e293b] flex flex-wrap h-auto">
+                  <TabsList className="bg-[#f1f5f9] flex flex-wrap h-auto">
                     <TabsTrigger 
                       value="issues" 
-                      className="data-[state=active]:bg-white dark:data-[state=active]:bg-[#0f172a] text-[#475569] dark:text-[#94a3b8] data-[state=active]:text-[#0f172a] dark:data-[state=active]:text-white text-xs md:text-sm px-2 md:px-3"
+                      className="data-[state=active]:bg-white text-[#475569] data-[state=active]:text-[#111827] text-xs md:text-sm px-2 md:px-3"
                       disabled={scanError}
                     >
                       Issues {!scanError && `(${violations.length})`}
                     </TabsTrigger>
-                    <TabsTrigger value="roadmap" className="data-[state=active]:bg-white dark:data-[state=active]:bg-[#0f172a] text-[#475569] dark:text-[#94a3b8] data-[state=active]:text-[#0f172a] dark:data-[state=active]:text-white text-xs md:text-sm px-2 md:px-3">
+                    <TabsTrigger value="roadmap" className="data-[state=active]:bg-white text-[#475569] data-[state=active]:text-[#111827] text-xs md:text-sm px-2 md:px-3">
                       Roadmap
                     </TabsTrigger>
-                    <TabsTrigger value="manual" className="data-[state=active]:bg-white dark:data-[state=active]:bg-[#0f172a] text-[#475569] dark:text-[#94a3b8] data-[state=active]:text-[#0f172a] dark:data-[state=active]:text-white text-xs md:text-sm px-2 md:px-3">
+                    <TabsTrigger value="manual" className="data-[state=active]:bg-white text-[#475569] data-[state=active]:text-[#111827] text-xs md:text-sm px-2 md:px-3">
                       Manual
                     </TabsTrigger>
-                    <TabsTrigger value="vision" className="data-[state=active]:bg-white dark:data-[state=active]:bg-[#0f172a] text-[#475569] dark:text-[#94a3b8] data-[state=active]:text-[#0f172a] dark:data-[state=active]:text-white text-xs md:text-sm px-2 md:px-3">
+                    <TabsTrigger value="vision" className="data-[state=active]:bg-white text-[#475569] data-[state=active]:text-[#111827] text-xs md:text-sm px-2 md:px-3">
                       👁️ AI Vision
                     </TabsTrigger>
-                    <TabsTrigger value="preview" className="data-[state=active]:bg-white dark:data-[state=active]:bg-[#0f172a] text-[#475569] dark:text-[#94a3b8] data-[state=active]:text-[#0f172a] dark:data-[state=active]:text-white text-xs md:text-sm px-2 md:px-3">
+                    <TabsTrigger value="preview" className="data-[state=active]:bg-white text-[#475569] data-[state=active]:text-[#111827] text-xs md:text-sm px-2 md:px-3">
                       Preview
                     </TabsTrigger>
                   </TabsList>
@@ -386,12 +381,12 @@ export default function AuditDetails() {
 
                 <TabsContent value="issues" className="space-y-4 mt-0">
                   {scanError ? (
-                    <div className="text-center py-8 md:py-12 bg-white dark:bg-[#1e293b] rounded-xl border border-[#e2e8f0] dark:border-[#334155] px-4">
+                    <div className="text-center py-8 md:py-12 bg-white rounded-xl border border-[#e2e8f0] px-4">
                       <Lock className="h-10 w-10 md:h-12 md:w-12 text-amber-500 mx-auto mb-4" />
-                      <h3 className="text-lg md:text-xl font-semibold text-[#0f172a] dark:text-white mb-2">
+                      <h3 className="text-lg md:text-xl font-semibold text-[#111827] mb-2">
                         No Issues Available
                       </h3>
-                      <p className="text-sm md:text-base text-[#475569] dark:text-[#94a3b8] max-w-md mx-auto">
+                      <p className="text-sm md:text-base text-[#475569] max-w-md mx-auto">
                         The scan could not be completed due to website restrictions.
                       </p>
                     </div>
@@ -400,12 +395,12 @@ export default function AuditDetails() {
                       <IssueCard key={index} issue={violation} />
                     ))
                   ) : (
-                    <div className="text-center py-8 md:py-12 bg-white dark:bg-[#1e293b] rounded-xl border border-[#e2e8f0] dark:border-[#334155] px-4">
+                    <div className="text-center py-8 md:py-12 bg-white rounded-xl border border-[#e2e8f0] px-4">
                       <Shield className="h-10 w-10 md:h-12 md:w-12 text-green-500 mx-auto mb-4" />
-                      <h3 className="text-lg md:text-xl font-semibold text-[#0f172a] dark:text-white mb-2">
+                      <h3 className="text-lg md:text-xl font-semibold text-[#111827] mb-2">
                         No accessibility issues found!
                       </h3>
-                      <p className="text-sm md:text-base text-[#475569] dark:text-[#94a3b8]">
+                      <p className="text-sm md:text-base text-[#475569]">
                         This website passes all selected compliance standards.
                       </p>
                     </div>
@@ -414,12 +409,12 @@ export default function AuditDetails() {
 
                 <TabsContent value="roadmap" className="space-y-4 mt-0">
                   {scanError ? (
-                    <div className="text-center py-8 md:py-12 bg-white dark:bg-[#1e293b] rounded-xl border border-[#e2e8f0] dark:border-[#334155] px-4">
+                    <div className="text-center py-8 md:py-12 bg-white rounded-xl border border-[#e2e8f0] px-4">
                       <Lock className="h-10 w-10 md:h-12 md:w-12 text-amber-500 mx-auto mb-4" />
-                      <h3 className="text-lg md:text-xl font-semibold text-[#0f172a] dark:text-white mb-2">
+                      <h3 className="text-lg md:text-xl font-semibold text-[#111827] mb-2">
                         Roadmap Unavailable
                       </h3>
-                      <p className="text-sm md:text-base text-[#475569] dark:text-[#94a3b8]">
+                      <p className="text-sm md:text-base text-[#475569]">
                         Cannot generate remediation roadmap because the scan failed.
                       </p>
                     </div>
@@ -443,9 +438,9 @@ export default function AuditDetails() {
                   
                   {showVisionIssues && visionIssues.length > 0 && (
                     <div className="space-y-3">
-                      <h3 className="font-semibold">Visual Issues Detected ({visionIssues.length})</h3>
+                      <h3 className="font-semibold text-[#111827]">Visual Issues Detected ({visionIssues.length})</h3>
                       {visionIssues.map((issue, idx) => (
-                        <div key={idx} className="p-4 border rounded-lg bg-[#f8fafc] dark:bg-[#0f172a]">
+                        <div key={idx} className="p-4 border border-[#e2e8f0] rounded-lg bg-white">
                           <div className="flex items-center gap-2 mb-2">
                             <span className={`text-xs px-2 py-1 rounded ${
                               issue.impact === 'critical' ? 'bg-red-100 text-red-700' :
@@ -455,9 +450,9 @@ export default function AuditDetails() {
                             }`}>
                               {issue.impact}
                             </span>
-                            <span className="text-sm font-medium">{issue.help}</span>
+                            <span className="text-sm font-medium text-[#111827]">{issue.help}</span>
                           </div>
-                          <p className="text-sm text-[#475569] dark:text-[#94a3b8]">{issue.description}</p>
+                          <p className="text-sm text-[#475569]">{issue.description}</p>
                         </div>
                       ))}
                     </div>

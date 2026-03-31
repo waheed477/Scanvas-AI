@@ -10,7 +10,6 @@ import {
 import { useToast } from "@/components/ui/use-toast";
 import { FileJson, FileText, Download, Check, Loader2 } from "lucide-react";
 import { jsPDF } from "jspdf";
-import html2canvas from "html2canvas";
 import { format } from "date-fns";
 
 interface ReportExportProps {
@@ -26,7 +25,7 @@ export function ReportExport({ auditId, auditData }: ReportExportProps) {
   const handleExportJSON = () => {
     try {
       const dataStr = JSON.stringify(auditData, null, 2);
-      const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+      const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
       const exportFileDefaultName = `scanvas-audit-${auditId}-${format(new Date(), 'yyyy-MM-dd')}.json`;
       
       const linkElement = document.createElement('a');
@@ -36,12 +35,12 @@ export function ReportExport({ auditId, auditData }: ReportExportProps) {
       
       toast({
         title: "Export Successful",
-        description: "JSON report has been downloaded.",
+        description: "JSON report downloaded.",
       });
     } catch (error) {
       toast({
         title: "Export Failed",
-        description: "There was an error generating the JSON report.",
+        description: "Error generating JSON report.",
         variant: "destructive",
       });
     }
@@ -50,74 +49,86 @@ export function ReportExport({ auditId, auditData }: ReportExportProps) {
   const handleExportPDF = async () => {
     setExporting(true);
     try {
-      const element = document.querySelector('.audit-report-content');
-      if (!element) {
-        throw new Error('Report content not found');
+      const doc = new jsPDF();
+      let y = 20;
+      
+      // Title
+      doc.setFontSize(24);
+      doc.setTextColor(51, 65, 85);
+      doc.text('Accessibility Audit Report', 20, y);
+      y += 15;
+      
+      // URL
+      doc.setFontSize(12);
+      doc.setTextColor(100, 116, 139);
+      doc.text(`URL: ${auditData.url}`, 20, y);
+      y += 10;
+      
+      // Date
+      doc.text(`Date: ${format(new Date(auditData.createdAt), 'MMMM d, yyyy')}`, 20, y);
+      y += 15;
+      
+      // Score
+      doc.setFontSize(18);
+      doc.setTextColor(51, 65, 85);
+      doc.text(`Score: ${auditData.score}`, 20, y);
+      y += 12;
+      
+      // Summary
+      if (auditData.summary) {
+        doc.setFontSize(14);
+        doc.setTextColor(51, 65, 85);
+        doc.text('Issues Summary', 20, y);
+        y += 10;
+        
+        doc.setFontSize(11);
+        doc.setTextColor(100, 116, 139);
+        doc.text(`Critical: ${auditData.summary.critical || 0}`, 30, y);
+        y += 7;
+        doc.text(`Serious: ${auditData.summary.serious || 0}`, 30, y);
+        y += 7;
+        doc.text(`Moderate: ${auditData.summary.moderate || 0}`, 30, y);
+        y += 7;
+        doc.text(`Minor: ${auditData.summary.minor || 0}`, 30, y);
+        y += 15;
       }
-
-      // Clone and prepare for PDF
-      const clone = element.cloneNode(true) as HTMLElement;
       
-      // Add style to override Tailwind v4 colors
-      const style = document.createElement('style');
-      style.innerHTML = `
-        * { 
-          color-scheme: light !important;
-        }
-        .bg-\\[#f8fafc\\] { background-color: #ffffff !important; }
-        .dark\\:bg-\\[#0f172a\\] { background-color: #ffffff !important; }
-        .dark\\:bg-\\[#1e293b\\] { background-color: #ffffff !important; }
-        .text-\\[#0f172a\\] { color: #000000 !important; }
-        .dark\\:text-white { color: #000000 !important; }
-        .text-\\[#475569\\] { color: #4b5563 !important; }
-        .dark\\:text-\\[#94a3b8\\] { color: #4b5563 !important; }
-        .border-\\[#e2e8f0\\] { border-color: #e5e7eb !important; }
-        .dark\\:border-\\[#334155\\] { border-color: #e5e7eb !important; }
-        button, .gap-2, .flex { display: flex; }
-        [class*="bg-"]:not(.bg-white) { background-color: #ffffff !important; }
-      `;
-      clone.prepend(style);
+      // Violations
+      const violations = auditData.results?.violations || [];
+      if (violations.length > 0) {
+        doc.setFontSize(14);
+        doc.setTextColor(51, 65, 85);
+        doc.text('Issues Found', 20, y);
+        y += 10;
+        
+        doc.setFontSize(10);
+        violations.slice(0, 10).forEach((v: any) => {
+          if (y > 270) {
+            doc.addPage();
+            y = 20;
+          }
+          doc.setTextColor(100, 116, 139);
+          doc.text(`• ${v.help || v.id}`, 25, y);
+          y += 6;
+          if (v.impact) {
+            doc.setTextColor(139, 92, 246);
+            doc.text(`  Impact: ${v.impact}`, 30, y);
+            y += 5;
+          }
+        });
+      }
       
-      clone.style.cssText = 'position:absolute; left:-9999px; top:-9999px; width:1200px; background:white; color:black;';
-      document.body.appendChild(clone);
-
-      const canvas = await html2canvas(clone, { 
-        scale: 2, 
-        backgroundColor: '#ffffff',
-        logging: false,
-        allowTaint: true,
-        useCORS: true,
-        onclone: (clonedDoc) => {
-          // Ensure all elements have proper background
-          const allElements = clonedDoc.querySelectorAll('*');
-          allElements.forEach(el => {
-            (el as HTMLElement).style.backgroundColor = 
-              (el as HTMLElement).style.backgroundColor === 'transparent' ? '#ffffff' : 
-              (el as HTMLElement).style.backgroundColor;
-          });
-        }
-      });
-      
-      document.body.removeChild(clone);
-      
-      const pdf = new jsPDF({
-        orientation: 'portrait',
-        unit: 'px',
-        format: [canvas.width / 2, canvas.height / 2]
-      });
-      
-      pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, canvas.width / 2, canvas.height / 2);
-      pdf.save(`scanvas-audit-${auditId}-${format(new Date(), 'yyyy-MM-dd')}.pdf`);
+      doc.save(`scanvas-audit-${auditId}.pdf`);
       
       toast({
         title: "Export Successful",
-        description: "PDF report has been downloaded.",
+        description: "PDF report downloaded.",
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error('PDF Export Error:', error);
       toast({
         title: "Export Failed",
-        description: "There was an error generating the PDF report. Please try again.",
+        description: error.message || "Error generating PDF.",
         variant: "destructive",
       });
     } finally {
@@ -139,29 +150,20 @@ export function ReportExport({ auditId, auditData }: ReportExportProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button 
-          variant="outline" 
-          className="gap-2 bg-white dark:bg-[#1e293b] border border-[#e2e8f0] dark:border-[#334155] shadow-sm hover:bg-[#f8fafc] dark:hover:bg-[#0f172a] transition-colors"
-        >
+        <Button variant="outline" className="gap-2">
           <Download className="w-4 h-4" />
           Export Report
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent 
-        align="end" 
-        className="w-56 bg-white dark:bg-[#1e293b] border border-[#e2e8f0] dark:border-[#334155] shadow-lg rounded-lg p-1 z-50"
-      >
-        <DropdownMenuItem 
-          onClick={handleExportJSON} 
-          className="gap-2 cursor-pointer hover:bg-[#f8fafc] dark:hover:bg-[#0f172a] rounded-md px-3 py-2 transition-colors"
-        >
+      <DropdownMenuContent align="end" className="w-56">
+        <DropdownMenuItem onClick={handleExportJSON} className="gap-2">
           <FileJson className="w-4 h-4" />
           <span>Export as JSON</span>
         </DropdownMenuItem>
         <DropdownMenuItem 
           onClick={handleExportPDF} 
           disabled={exporting} 
-          className="gap-2 cursor-pointer hover:bg-[#f8fafc] dark:hover:bg-[#0f172a] rounded-md px-3 py-2 transition-colors"
+          className="gap-2"
         >
           {exporting ? (
             <Loader2 className="w-4 h-4 animate-spin" />
@@ -170,11 +172,8 @@ export function ReportExport({ auditId, auditData }: ReportExportProps) {
           )}
           <span>{exporting ? "Generating PDF..." : "Export as PDF"}</span>
         </DropdownMenuItem>
-        <DropdownMenuSeparator className="bg-[#e2e8f0] dark:bg-[#334155] my-1" />
-        <DropdownMenuItem 
-          onClick={handleCopyLink} 
-          className="gap-2 cursor-pointer hover:bg-[#f8fafc] dark:hover:bg-[#0f172a] rounded-md px-3 py-2 transition-colors"
-        >
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={handleCopyLink} className="gap-2">
           {copied ? (
             <Check className="w-4 h-4 text-green-500" />
           ) : (

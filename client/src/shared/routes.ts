@@ -25,11 +25,8 @@ export const api = {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'X-User-Id': localStorage.getItem('scanvas_user_id') || 'anonymous'
         },
-        // Added mode: 'cors' for cross-origin requests
-        mode: 'cors',
-        credentials: 'include'
+        mode: 'cors'
       });
       
       if (!res.ok) {
@@ -51,12 +48,8 @@ export const api = {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
-          'X-User-Id': localStorage.getItem('scanvas_user_id') || 'anonymous',
-          'Accept': 'application/json'
         },
-        // Added mode: 'cors' for cross-origin requests
         mode: 'cors',
-        credentials: 'include',
         body: JSON.stringify(data)
       });
       
