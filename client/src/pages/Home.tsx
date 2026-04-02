@@ -107,7 +107,7 @@ export default function Home() {
         
         {/* Background Image - Abstract Accessibility Pattern */}
         <div 
-          className="absolute inset-0 opacity-[0.03] bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 opacity-[0.2] bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage: "url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1600&q=80')",
             backgroundBlendMode: "overlay"
@@ -123,9 +123,9 @@ export default function Home() {
         <svg className="absolute bottom-0 left-0 w-full h-96 opacity-40" preserveAspectRatio="none" viewBox="0 0 1440 320">
           <defs>
             <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#334155" stopOpacity="0.1" />
-              <stop offset="50%" stopColor="#5b6e8c" stopOpacity="0.2" />
-              <stop offset="100%" stopColor="#334155" stopOpacity="0.1" />
+              <stop offset="0%" stopColor="#0a0f16" stopOpacity="0.1" />
+              <stop offset="50%" stopColor="#0c111a" stopOpacity="0.2" />
+              <stop offset="100%" stopColor="#101722" stopOpacity="0.1" />
             </linearGradient>
           </defs>
           <path fill="url(#waveGradient)" fillOpacity="0.5" d="M0,192L48,186.7C96,181,192,171,288,176C384,181,480,203,576,197.3C672,192,768,160,864,154.7C960,149,1056,171,1152,181.3C1248,192,1344,192,1392,192L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
@@ -151,7 +151,7 @@ export default function Home() {
         <svg className="absolute top-0 left-0 w-full h-full">
           <defs>
             <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-              <circle cx="2" cy="2" r="1" fill="#334155" fillOpacity="0.2">
+              <circle cx="2" cy="2" r="1" fill="#1e1e1f" fillOpacity="0.9">
                 <animate attributeName="fillOpacity" values="0.1;0.3;0.1" dur="3s" repeatCount="indefinite" />
               </circle>
             </pattern>
@@ -376,7 +376,7 @@ export default function Home() {
         </section>
 
         {/* Recent Audits Section */}
-        <section className="py-20 bg-[#f8fafc]/80 backdrop-blur-sm border-t border-[#e2e8f0] relative">
+        <section className="py-20 bg-[#f8fafc]/30 backdrop-blur-sm border-t border-[#535455] relative">
           <div className="container max-w-5xl mx-auto px-4 relative">
             <div className="flex items-center justify-between mb-10">
               <div>

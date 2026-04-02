@@ -17,7 +17,7 @@ function readAudits(): any[] {
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  // ✅ CORS headers
+  // ✅ Complete CORS headers
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -33,6 +33,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     const { id } = req.query;
+    console.log('🔍 Fetching audit with ID:', id);
+    
     const audits = readAudits();
     const audit = audits.find((a: any) => a.id === id);
 
@@ -42,7 +44,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     return res.status(200).json(audit);
   } catch (error: any) {
-    console.error(' Error fetching audit:', error);
+    console.error('❌ Error fetching audit:', error);
     return res.status(500).json({ error: error.message || 'Failed to fetch audit' });
   }
 }

@@ -59,7 +59,7 @@ export default function About() {
   ];
 
   return (
-    <div className="min-h-screen bg-white relative">
+    <div className="min-h-screen bg-[#f5f7fa] relative">
       {/* Animated Background - Subtle */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 -left-40 w-64 md:w-96 h-64 md:h-96 bg-[#334155]/5 rounded-full blur-3xl animate-float" />

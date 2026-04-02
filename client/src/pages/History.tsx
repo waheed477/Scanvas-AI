@@ -99,7 +99,7 @@ export default function HistoryPage() {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       onClick={() => setLocation(`/audit/${audit.id}`)}
-      className="bg-white/90 backdrop-blur-sm rounded-lg border border-[#e2e8f0] p-4 mb-3 cursor-pointer hover:shadow-md transition-all"
+      className="bg-white rounded-lg border border-[#e2e8f0] p-4 mb-3 cursor-pointer hover:shadow-md transition-all"
     >
       <div className="flex items-start justify-between mb-2">
         <div className="flex items-center gap-3 flex-1 min-w-0">
@@ -137,31 +137,8 @@ export default function HistoryPage() {
   );
 
   return (
-    <div className="min-h-screen bg-white relative overflow-hidden">
-      {/* Professional Background - Abstract Gradient */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Base Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-white via-[#fafbfd] to-[#f5f7fa]" />
-        
-        {/* Animated Gradient Orbs */}
-        <div className="absolute top-20 right-20 w-80 h-80 bg-gradient-to-l from-[#334155]/10 to-[#5b6e8c]/10 rounded-full blur-3xl animate-float-slow" />
-        <div className="absolute bottom-20 left-20 w-96 h-96 bg-gradient-to-r from-[#64748b]/10 to-[#334155]/10 rounded-full blur-3xl animate-float" />
-        
-        {/* Subtle Grid Pattern */}
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23334155\' fill-opacity=\'0.02\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-40" />
-        
-        {/* Floating Dots */}
-        <div className="absolute top-1/3 left-10 w-1.5 h-1.5 bg-[#334155]/20 rounded-full animate-pulse" />
-        <div className="absolute bottom-1/4 right-20 w-2 h-2 bg-[#5b6e8c]/20 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute top-2/3 right-1/3 w-1 h-1 bg-[#64748b]/20 rounded-full animate-pulse" style={{ animationDelay: '2s' }} />
-        
-        {/* Wave Border */}
-        <svg className="absolute bottom-0 left-0 w-full h-32 opacity-30" preserveAspectRatio="none" viewBox="0 0 1440 120">
-          <path fill="#334155" fillOpacity="0.1" d="M0,64L48,69.3C96,75,192,85,288,80C384,75,480,53,576,58.7C672,64,768,96,864,101.3C960,107,1056,85,1152,74.7C1248,64,1344,64,1392,64L1440,64L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z" />
-        </svg>
-      </div>
-
-      <div className="container max-w-6xl mx-auto py-4 md:py-8 px-3 md:px-4 relative z-10">
+    <div className="min-h-screen bg-[#f5f7fa] py-4 md:py-8 px-3 md:px-4">
+      <div className="container max-w-6xl mx-auto">
         {/* Header Section */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
           <div>
@@ -189,7 +166,7 @@ export default function HistoryPage() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6">
-          <Card className="bg-white/80 backdrop-blur-sm border-[#e2e8f0]">
+          <Card className="bg-[#f8fafc] border-[#e2e8f0]">
             <CardContent className="p-3 md:p-4">
               <p className="text-xs md:text-sm text-[#64748b]">Total Scans</p>
               <p className="text-lg md:text-2xl font-bold text-[#111827]">
@@ -197,7 +174,7 @@ export default function HistoryPage() {
               </p>
             </CardContent>
           </Card>
-          <Card className="bg-white/80 backdrop-blur-sm border-[#e2e8f0]">
+          <Card className="bg-[#f8fafc] border-[#e2e8f0]">
             <CardContent className="p-3 md:p-4">
               <p className="text-xs md:text-sm text-[#64748b]">Avg Score</p>
               <p className="text-lg md:text-2xl font-bold text-[#111827]">
@@ -205,7 +182,7 @@ export default function HistoryPage() {
               </p>
             </CardContent>
           </Card>
-          <Card className="bg-white/80 backdrop-blur-sm border-[#e2e8f0]">
+          <Card className="bg-[#f8fafc] border-[#e2e8f0]">
             <CardContent className="p-3 md:p-4">
               <p className="text-xs md:text-sm text-[#64748b]">Best Score</p>
               <p className="text-lg md:text-2xl font-bold text-emerald-600">
@@ -213,7 +190,7 @@ export default function HistoryPage() {
               </p>
             </CardContent>
           </Card>
-          <Card className="bg-white/80 backdrop-blur-sm border-[#e2e8f0]">
+          <Card className="bg-[#f8fafc] border-[#e2e8f0]">
             <CardContent className="p-3 md:p-4">
               <p className="text-xs md:text-sm text-[#64748b]">Issues Found</p>
               <p className="text-lg md:text-2xl font-bold text-[#111827]">
@@ -224,7 +201,6 @@ export default function HistoryPage() {
           </Card>
         </div>
 
-        {/* Rest of the component remains the same */}
         {/* Search and Filter */}
         <div className="flex flex-col md:flex-row gap-3 mb-6">
           <div className="relative flex-1">
@@ -233,7 +209,7 @@ export default function HistoryPage() {
               placeholder="Search by URL..."
               value={search}
               onChange={(e) => handleSearch(e.target.value)}
-              className="pl-9 pr-8 h-10 md:h-12 text-sm w-full bg-white/90 backdrop-blur-sm border-[#e2e8f0]"
+              className="pl-9 pr-8 h-10 md:h-12 text-sm w-full bg-white border-[#e2e8f0]"
             />
             {search && (
               <button
@@ -249,7 +225,7 @@ export default function HistoryPage() {
             <Button
               variant="outline"
               onClick={() => setMobileFiltersOpen(!mobileFiltersOpen)}
-              className="gap-2 bg-white/80 backdrop-blur-sm"
+              className="gap-2"
             >
               <Filter className="w-4 h-4" />
               Filters
@@ -285,7 +261,7 @@ export default function HistoryPage() {
         ) : (
           <>
             <div className="hidden md:block">
-              <Card className="border-[#e2e8f0] bg-white/80 backdrop-blur-sm">
+              <Card className="border-[#e2e8f0] bg-[#f8fafc]">
                 <CardContent className="p-0">
                   {isLoading ? (
                     <div className="flex flex-col items-center justify-center py-20 gap-4">
@@ -308,7 +284,7 @@ export default function HistoryPage() {
                           {filteredAudits.map((audit) => (
                             <TableRow 
                               key={audit.id} 
-                              className="cursor-pointer hover:bg-[#f8fafc]/80 border-b border-[#e2e8f0]"
+                              className="cursor-pointer hover:bg-[#f8fafc] border-b border-[#e2e8f0]"
                               onClick={() => setLocation(`/audit/${audit.id}`)}
                             >
                               <TableCell className="font-medium max-w-[300px] truncate">
@@ -359,7 +335,7 @@ export default function HistoryPage() {
                   <AuditMobileCard key={audit.id} audit={audit} />
                 ))
               ) : (
-                <div className="text-center py-12 space-y-4 bg-white/80 backdrop-blur-sm rounded-lg border border-[#e2e8f0] p-8">
+                <div className="text-center py-12 space-y-4 bg-white rounded-lg border border-[#e2e8f0] p-8">
                   <p className="text-[#475569]">No audits found.</p>
                   <Button onClick={() => setLocation("/")} className="w-full sm:w-auto bg-[#334155] text-white hover:bg-[#5b6e8c]">
                     Run your first scan

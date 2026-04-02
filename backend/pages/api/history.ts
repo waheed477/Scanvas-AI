@@ -35,7 +35,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const audits = readAudits();
     return res.status(200).json(audits);
   } catch (error: any) {
-    console.error(' Error fetching history:', error);
+    console.error('❌ Error fetching history:', error);
     return res.status(500).json({ error: error.message || 'Failed to fetch history' });
   }
 }

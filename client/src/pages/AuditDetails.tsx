@@ -45,7 +45,7 @@ export default function AuditDetails() {
   // Guard condition
   if (!id || id === 'undefined') {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center p-4">
+      <div className="min-h-screen bg-[#f8f8fa] flex items-center justify-center p-4">
         <div className="text-center">
           <Loader2 className="h-8 w-8 animate-spin text-[#334155] mx-auto mb-4" />
           <p className="text-[#475569]">Loading audit details...</p>
@@ -72,7 +72,7 @@ export default function AuditDetails() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center p-4">
+      <div className="min-h-screen bg-[#f5f7fa] flex items-center justify-center p-4">
         <div className="text-center">
           <Loader2 className="h-8 w-8 animate-spin text-[#334155] mx-auto mb-4" />
           <p className="text-[#475569]">Loading audit details...</p>
@@ -84,7 +84,7 @@ export default function AuditDetails() {
   if (error || !audit) {
     console.error('Audit fetch error:', error);
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center p-4">
+      <div className="min-h-screen bg-[#f5f7fa] flex items-center justify-center p-4">
         <div className="text-center max-w-md w-full">
           <ServerCrash className="h-16 w-16 text-red-500 mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-[#111827] mb-2">Audit not found</h2>
@@ -197,7 +197,7 @@ export default function AuditDetails() {
   );
 
   return (
-    <div className="min-h-screen bg-white py-4 md:py-8 px-3 md:px-4">
+    <div className="min-h-screen bg-[#f5f7fa] py-4 md:py-8 px-3 md:px-4">
       <div className="container max-w-6xl mx-auto">
         {/* Header with back button and responsive actions */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 md:mb-6">

@@ -136,7 +136,7 @@ export default function AuditPage() {
     : exampleUrls.filter(ex => ex.category === exampleCategory);
 
   return (
-    <div className="min-h-screen bg-white py-4 md:py-8 px-3 md:px-4">
+    <div className="min-h-screen bg-[#f5f7fa] py-4 md:py-8 px-3 md:px-4">
       <div className="container max-w-6xl mx-auto">
         {/* Header with back button */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 md:mb-8">
