@@ -136,33 +136,33 @@ export default function AuditPage() {
     : exampleUrls.filter(ex => ex.category === exampleCategory);
 
   return (
-    <div className="min-h-screen bg-[#f5f7fa] py-4 md:py-8 px-3 md:px-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0f16] via-[#0f172a] to-[#1a1f2e] py-4 md:py-8 px-3 md:px-4">
       <div className="container max-w-6xl mx-auto">
         {/* Header with back button */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 md:mb-8">
           <Button
             variant="ghost"
             onClick={() => setLocation("/")}
-            className="gap-2 text-[#475569] hover:text-[#334155] w-fit"
+            className="gap-2 text-white/60 hover:text-white w-fit"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Home
           </Button>
           
-          <div className="flex items-center gap-3">
-            <Button
-              variant="outline"
-              onClick={() => setLocation("/history")}
-              className="gap-2"
-            >
-              <History className="w-4 h-4" />
-              <span className="hidden sm:inline">View History</span>
-            </Button>
-            <StandardsSelector 
-              selectedStandards={selectedStandards}
-              onStandardsChange={setSelectedStandards}
-            />
-          </div>
+         <div className="flex items-center gap-3">
+  <Button
+    variant="outline"
+    onClick={() => setLocation("/history")}
+    className="gap-2 border-white/20 bg-transparent text-white/80 hover:text-white hover:bg-white/10"
+  >
+    <History className="w-4 h-4" />
+    <span className="hidden sm:inline">View History</span>
+  </Button>
+  <StandardsSelector 
+    selectedStandards={selectedStandards}
+    onStandardsChange={setSelectedStandards}
+  />
+</div>
         </div>
 
         {/* Hero Section */}
@@ -171,59 +171,64 @@ export default function AuditPage() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-8 md:mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-gradient-to-r from-[#334155]/10 to-[#64748b]/10 text-[#334155] text-xs md:text-sm font-medium mb-4 md:mb-6 border border-[#e2e8f0]">
+          <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-white/10 backdrop-blur-sm text-white/80 text-xs md:text-sm font-medium mb-4 md:mb-6 border border-white/20">
             <Zap className="w-3 h-3 md:w-4 md:h-4" />
             <span>New Accessibility Scan</span>
           </div>
           
           <h1 className="text-3xl md:text-5xl font-bold mb-3 md:mb-4 px-2">
-            <span className="bg-gradient-to-r from-[#111827] to-[#334155] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
               Start a New Audit
             </span>
           </h1>
           
-          <p className="text-sm md:text-lg text-[#475569] max-w-2xl mx-auto px-4">
+          <p className="text-sm md:text-lg text-white/60 max-w-2xl mx-auto px-4">
             Enter any website URL to get instant accessibility insights and recommendations
           </p>
         </motion.div>
 
-        {/* Main Content Tabs */}
-        <Tabs defaultValue="single" className="space-y-6 md:space-y-8">
-          <TabsList className="grid w-full max-w-xs md:max-w-md mx-auto grid-cols-2 bg-[#f1f5f9]">
-            <TabsTrigger value="single" className="gap-1 md:gap-2 text-xs md:text-sm data-[state=active]:bg-white">
-              <Search className="w-3 h-3 md:w-4 md:h-4" />
-              <span>Single URL</span>
-            </TabsTrigger>
-            <TabsTrigger value="batch" className="gap-1 md:gap-2 text-xs md:text-sm data-[state=active]:bg-white">
-              <BarChart className="w-3 h-3 md:w-4 md:h-4" />
-              <span>Batch Scan</span>
-            </TabsTrigger>
-          </TabsList>
-
+       {/* Main Content Tabs */}
+<Tabs defaultValue="single" className="space-y-6 md:space-y-8">
+  <TabsList className="grid w-full max-w-xs md:max-w-md mx-auto grid-cols-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-1">
+    <TabsTrigger 
+      value="single" 
+      className="gap-1 md:gap-2 text-xs md:text-sm data-[state=active]:bg-white/20 data-[state=active]:text-white text-white/70 rounded-md transition-all"
+    >
+      <Search className="w-3 h-3 md:w-4 md:h-4" />
+      <span>Single URL</span>
+    </TabsTrigger>
+    <TabsTrigger 
+      value="batch" 
+      className="gap-1 md:gap-2 text-xs md:text-sm data-[state=active]:bg-white/20 data-[state=active]:text-white text-white/70 rounded-md transition-all"
+    >
+      <BarChart className="w-3 h-3 md:w-4 md:h-4" />
+      <span>Batch Scan</span>
+    </TabsTrigger>
+  </TabsList>
           {/* Single URL Scan */}
           <TabsContent value="single">
-            <Card className="border-[#e2e8f0] bg-[#f8fafc]">
+            <Card className="border-white/20 bg-white/10 backdrop-blur-md">
               <CardContent className="p-4 md:p-8">
                 <form onSubmit={handleAudit} className="space-y-4 md:space-y-6">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-[#111827] block">
+                    <label className="text-sm font-medium text-white block">
                       Website URL
                     </label>
                     <div className="flex flex-col sm:flex-row gap-3">
                       <div className="relative flex-1">
-                        <Search className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 text-[#64748b] w-4 h-4 md:w-5 md:h-5" />
+                        <Search className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 text-white/40 w-4 h-4 md:w-5 md:h-5" />
                         <Input
                           placeholder="Enter website URL (e.g., example.com)"
                           value={url}
                           onChange={(e) => setUrl(e.target.value)}
-                          className="pl-9 md:pl-11 h-12 md:h-14 text-sm md:text-base border-[#e2e8f0] focus-visible:ring-2 focus-visible:ring-[#334155]/30"
+                          className="pl-9 md:pl-11 h-12 md:h-14 text-sm md:text-base border-white/20 bg-white/5 text-white placeholder:text-white/40 focus-visible:ring-2 focus-visible:ring-white/30"
                           disabled={createAudit.isPending}
                         />
                       </div>
                       <Button
                         type="submit"
                         size="lg"
-                        className="h-12 md:h-14 px-4 md:px-8 bg-[#334155] text-white hover:bg-[#5b6e8c] shadow-lg disabled:opacity-50 whitespace-nowrap text-sm md:text-base"
+                        className="h-12 md:h-14 px-4 md:px-8 bg-white text-[#1e293b] hover:bg-white/90 shadow-lg disabled:opacity-50 whitespace-nowrap text-sm md:text-base"
                         disabled={createAudit.isPending}
                       >
                         {createAudit.isPending ? (
@@ -241,11 +246,11 @@ export default function AuditPage() {
                   {/* Example URLs with Categories */}
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <p className="text-xs md:text-sm text-[#64748b]">Try these examples:</p>
+                      <p className="text-xs md:text-sm text-white/50">Try these examples:</p>
                       <select
                         value={exampleCategory}
                         onChange={(e) => setExampleCategory(e.target.value)}
-                        className="text-xs md:text-sm bg-transparent border border-[#e2e8f0] rounded px-2 py-1"
+                        className="text-xs md:text-sm bg-white/10 border border-white/20 rounded px-2 py-1 text-white/80"
                       >
                         <option value="all">All</option>
                         <option value="test">Test Sites</option>
@@ -261,7 +266,7 @@ export default function AuditPage() {
                           key={example.url}
                           type="button"
                           onClick={() => setUrl(example.url)}
-                          className="px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-white border border-[#e2e8f0] text-xs md:text-sm text-[#475569] hover:text-[#334155] hover:border-[#334155]/50 transition-colors"
+                          className="px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-xs md:text-sm text-white/70 hover:text-white hover:border-white/40 hover:bg-white/20 transition-colors"
                         >
                           {example.label}
                         </button>
@@ -288,19 +293,19 @@ export default function AuditPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card className="border-[#e2e8f0] bg-[#f8fafc] hover:shadow-md transition-all">
+              <Card className="border-white/20 bg-white/10 backdrop-blur-md hover:shadow-lg transition-all">
                 <CardContent className="p-3 md:p-4 text-center">
-                  <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full bg-${stat.color}-100 flex items-center justify-center mx-auto mb-2 md:mb-3`}>
-                    <stat.icon className={`w-4 h-4 md:w-5 md:h-5 text-${stat.color}-600`} />
+                  <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full bg-${stat.color}-500/20 flex items-center justify-center mx-auto mb-2 md:mb-3`}>
+                    <stat.icon className={`w-4 h-4 md:w-5 md:h-5 text-${stat.color}-400`} />
                   </div>
-                  <p className="text-lg md:text-2xl font-bold text-[#111827]">
+                  <p className="text-lg md:text-2xl font-bold text-white">
                     {auditsLoading ? (
-                      <Loader2 className="w-4 h-4 animate-spin mx-auto" />
+                      <Loader2 className="w-4 h-4 animate-spin mx-auto text-white/60" />
                     ) : (
                       stat.value
                     )}
                   </p>
-                  <p className="text-xs md:text-sm text-[#64748b]">{stat.label}</p>
+                  <p className="text-xs md:text-sm text-white/50">{stat.label}</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -311,14 +316,14 @@ export default function AuditPage() {
         {recentAudits && recentAudits.length > 0 && (
           <div className="mt-8 md:mt-12">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg md:text-xl font-semibold text-[#111827]">
+              <h2 className="text-lg md:text-xl font-semibold text-white">
                 Recent Activity
               </h2>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setLocation("/history")}
-                className="text-xs md:text-sm gap-1"
+                className="text-xs md:text-sm gap-1 text-white/60 hover:text-white"
               >
                 View All
                 <ExternalLink className="w-3 h-3" />
@@ -329,28 +334,28 @@ export default function AuditPage() {
                 <div
                   key={audit.id}
                   onClick={() => setLocation(`/audit/${audit.id}`)}
-                  className="p-3 md:p-4 bg-white rounded-lg border border-[#e2e8f0] hover:shadow-md transition-all cursor-pointer"
+                  className="p-3 md:p-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 hover:shadow-md transition-all cursor-pointer"
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3 min-w-0">
                       <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-xs md:text-sm font-bold flex-shrink-0 ${
-                        audit.score >= 90 ? "bg-emerald-100 text-emerald-700" :
-                        audit.score >= 70 ? "bg-blue-100 text-blue-700" :
-                        audit.score >= 50 ? "bg-yellow-100 text-yellow-700" :
-                        "bg-red-100 text-red-700"
+                        audit.score >= 90 ? "bg-emerald-500/20 text-emerald-400" :
+                        audit.score >= 70 ? "bg-blue-500/20 text-blue-400" :
+                        audit.score >= 50 ? "bg-yellow-500/20 text-yellow-400" :
+                        "bg-red-500/20 text-red-400"
                       }`}>
                         {audit.score}
                       </div>
                       <div className="min-w-0">
-                        <p className="font-medium text-sm md:text-base truncate text-[#111827]">
+                        <p className="font-medium text-sm md:text-base truncate text-white">
                           {audit.url}
                         </p>
-                        <p className="text-xs text-[#64748b]">
+                        <p className="text-xs text-white/50">
                           {formatDistanceToNow(new Date(audit.createdAt), { addSuffix: true })}
                         </p>
                       </div>
                     </div>
-                    <div className="text-xs md:text-sm text-[#334155] flex-shrink-0">
+                    <div className="text-xs md:text-sm text-white/60 flex-shrink-0">
                       {audit.summary?.total || 0} issues
                     </div>
                   </div>
@@ -362,7 +367,7 @@ export default function AuditPage() {
 
         {/* Features Overview */}
         <div className="mt-8 md:mt-16">
-          <h2 className="text-xl md:text-2xl font-bold text-center mb-6 md:mb-8 bg-gradient-to-r from-[#111827] to-[#334155] bg-clip-text text-transparent px-2">
+          <h2 className="text-xl md:text-2xl font-bold text-center mb-6 md:mb-8 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent px-2">
             Why Use Scanvas?
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
@@ -383,15 +388,15 @@ export default function AuditPage() {
                 desc: "Code snippets and step-by-step remediation guidance"
               }
             ].map((feature, index) => (
-              <Card key={index} className="border-[#e2e8f0] bg-[#f8fafc] hover:shadow-lg transition-all">
+              <Card key={index} className="border-white/20 bg-white/10 backdrop-blur-md hover:shadow-lg transition-all">
                 <CardContent className="p-4 md:p-6 text-center">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#334155]/10 flex items-center justify-center mx-auto mb-3 md:mb-4">
-                    <div className="text-[#334155]">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-3 md:mb-4">
+                    <div className="text-white/80">
                       {feature.icon}
                     </div>
                   </div>
-                  <h3 className="font-semibold text-base md:text-lg mb-1 md:mb-2 text-[#111827]">{feature.title}</h3>
-                  <p className="text-xs md:text-sm text-[#475569]">
+                  <h3 className="font-semibold text-base md:text-lg mb-1 md:mb-2 text-white">{feature.title}</h3>
+                  <p className="text-xs md:text-sm text-white/60">
                     {feature.desc}
                   </p>
                 </CardContent>

@@ -17,10 +17,10 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-[#e2e8f0] shadow-sm">
+    <nav className="sticky top-0 z-50 bg-black/30 backdrop-blur-xl border-b border-white/10 shadow-lg">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
-          {/* Logo with Eye Icon - Accessibility Symbol */}
+          {/* Logo */}
           <Link href="/">
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
@@ -28,17 +28,16 @@ export default function Navbar() {
               className="flex items-center gap-2 cursor-pointer group"
             >
               <div className="relative">
-                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#334155] to-[#5b6e8c] flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300 group-hover:scale-105">
-                  <Eye className="w-5 h-5 text-white" />
+                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-white to-white/80 flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300 group-hover:scale-105">
+                  <Eye className="w-5 h-5 text-[#1e293b]" />
                 </div>
-                {/* Subtle ring effect */}
-                <div className="absolute inset-0 rounded-xl bg-[#334155]/20 blur-sm -z-10 group-hover:blur-md transition-all" />
+                <div className="absolute inset-0 rounded-xl bg-white/20 blur-sm -z-10 group-hover:blur-md transition-all" />
               </div>
               <div className="flex flex-col items-start">
-                <span className="text-xl font-bold text-[#334155] leading-tight">
+                <span className="text-xl font-bold text-white leading-tight">
                   Scanvas
                 </span>
-                <span className="text-[10px] text-[#64748b] -mt-1 tracking-wide">
+                <span className="text-[10px] text-white/50 -mt-1 tracking-wide">
                   Accessibility First
                 </span>
               </div>
@@ -53,15 +52,15 @@ export default function Navbar() {
                   variant="ghost"
                   className={`relative px-4 py-2 rounded-full transition-all ${
                     location === item.path
-                      ? "text-[#334155] bg-[#334155]/10 font-medium"
-                      : "text-[#64748b] hover:text-[#334155] hover:bg-[#334155]/5"
+                      ? "text-white bg-white/10 font-medium"
+                      : "text-white/60 hover:text-white hover:bg-white/10"
                   }`}
                 >
                   {item.name}
                   {location === item.path && (
                     <motion.div
                       layoutId="activeNav"
-                      className="absolute bottom-0 left-2 right-2 h-0.5 bg-gradient-to-r from-[#334155] to-[#5b6e8c] rounded-full"
+                      className="absolute bottom-0 left-2 right-2 h-0.5 bg-gradient-to-r from-white to-white/60 rounded-full"
                       initial={false}
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
@@ -71,19 +70,19 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Right side buttons - Auth */}
+          {/* Auth Buttons */}
           <div className="hidden md:flex items-center gap-2">
             {status === "loading" ? (
-              <div className="w-20 h-9 animate-pulse bg-[#f1f5f9] rounded-full" />
+              <div className="w-20 h-9 animate-pulse bg-white/10 rounded-full" />
             ) : session ? (
               <>
-                <span className="text-sm text-[#64748b]">
+                <span className="text-sm text-white/70">
                   {session.user?.email?.split('@')[0]}
                 </span>
                 <Button
                   variant="outline"
                   onClick={() => signOut()}
-                  className="rounded-full border-[#e2e8f0] text-[#334155] hover:bg-[#f8fafc] hover:text-[#334155]"
+                  className="rounded-full border-white/20 text-white/80 hover:bg-white/10 hover:text-white"
                 >
                   Sign Out
                 </Button>
@@ -91,7 +90,7 @@ export default function Navbar() {
             ) : (
               <Button
                 onClick={() => signIn('google', { callbackUrl: 'http://localhost:3000' })}
-                className="rounded-full bg-[#334155] text-white hover:bg-[#5b6e8c]"
+                className="rounded-full bg-white text-[#1e293b] hover:bg-white/90 shadow-lg"
               >
                 Sign In
               </Button>
@@ -102,12 +101,12 @@ export default function Navbar() {
           <div className="flex items-center gap-2 md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 rounded-lg hover:bg-[#334155]/10 transition-colors"
+              className="p-2 rounded-lg hover:bg-white/10 transition-colors"
             >
               {isMenuOpen ? (
-                <X className="w-6 h-6 text-[#334155]" />
+                <X className="w-6 h-6 text-white" />
               ) : (
-                <Menu className="w-6 h-6 text-[#64748b]" />
+                <Menu className="w-6 h-6 text-white/70" />
               )}
             </button>
           </div>
@@ -119,7 +118,7 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="md:hidden py-4 border-t border-[#e2e8f0] bg-white/90 backdrop-blur-md"
+            className="md:hidden py-4 border-t border-white/10 bg-black/50 backdrop-blur-xl"
           >
             {navItems.map((item) => (
               <Link key={item.path} href={item.path}>
@@ -127,8 +126,8 @@ export default function Navbar() {
                   variant="ghost"
                   className={`w-full justify-start mb-1 ${
                     location === item.path
-                      ? "text-[#334155] bg-[#334155]/10"
-                      : "text-[#64748b]"
+                      ? "text-white bg-white/10"
+                      : "text-white/60"
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
@@ -138,20 +137,20 @@ export default function Navbar() {
             ))}
             
             {/* Mobile auth buttons */}
-            <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-[#e2e8f0]">
+            <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-white/10">
               {status === "loading" ? (
-                <div className="w-full h-9 animate-pulse bg-[#f1f5f9] rounded-full" />
+                <div className="w-full h-9 animate-pulse bg-white/10 rounded-full" />
               ) : session ? (
                 <>
-                  <p className="text-sm text-[#64748b] px-2">Signed in as {session.user?.email}</p>
-                  <Button variant="outline" onClick={() => signOut()} className="w-full">
+                  <p className="text-sm text-white/60 px-2">Signed in as {session.user?.email}</p>
+                  <Button variant="outline" onClick={() => signOut()} className="w-full border-white/20 text-white/80 hover:bg-white/10">
                     Sign Out
                   </Button>
                 </>
               ) : (
                 <Button
                   onClick={() => signIn('google', { callbackUrl: 'http://localhost:3000' })}
-                  className="w-full bg-[#334155] text-white hover:bg-[#5b6e8c]"
+                  className="w-full bg-white text-[#1e293b] hover:bg-white/90"
                 >
                   Sign In
                 </Button>

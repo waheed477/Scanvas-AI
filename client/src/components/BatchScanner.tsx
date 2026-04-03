@@ -89,14 +89,14 @@ export function BatchScanner() {
   };
 
   return (
-    <Card className="border-[#e2e8f0] dark:border-[#334155]">
+    <Card className="border-white/20 bg-white/10 backdrop-blur-md">
       <CardContent className="p-6 space-y-4">
         <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold flex items-center gap-2">
-            <TrendingUp className="w-5 h-5 text-[#2563eb]" />
+          <h3 className="text-lg font-semibold flex items-center gap-2 text-white">
+            <TrendingUp className="w-5 h-5 text-white/80" />
             Batch URL Scanner
           </h3>
-          <Badge variant="outline" className="bg-[#2563eb]/10 text-[#2563eb]">
+          <Badge variant="outline" className="bg-white/10 text-white/80 border-white/20">
             Compare Multiple Sites
           </Badge>
         </div>
@@ -109,7 +109,7 @@ export function BatchScanner() {
                 value={url}
                 onChange={(e) => updateUrl(index, e.target.value)}
                 disabled={scanning}
-                className="flex-1"
+                className="flex-1 bg-white/5 border-white/20 text-white placeholder:text-white/40 focus-visible:ring-white/30"
               />
               {urls.length > 1 && (
                 <Button
@@ -117,7 +117,7 @@ export function BatchScanner() {
                   size="icon"
                   onClick={() => removeUrlField(index)}
                   disabled={scanning}
-                  className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                  className="text-white/50 hover:text-red-400 hover:bg-red-500/10"
                 >
                   <X className="w-4 h-4" />
                 </Button>
@@ -127,40 +127,40 @@ export function BatchScanner() {
         </div>
 
         <div className="flex gap-3">
-          <Button
-            variant="outline"
-            onClick={addUrlField}
-            disabled={scanning}
-            className="gap-2"
-          >
-            <Plus className="w-4 h-4" />
-            Add URL
-          </Button>
-          <Button
-            onClick={handleBatchScan}
-            disabled={scanning || urls.filter(u => u.trim()).length === 0}
-            className="flex-1 bg-gradient-to-r from-[#2563eb] to-[#7c3aed] text-white gap-2"
-          >
-            {scanning ? (
-              <>
-                <Loader2 className="w-4 h-4 animate-spin" />
-                Scanning {urls.filter(u => u.trim()).length} URLs...
-              </>
-            ) : (
-              <>
-                Start Batch Scan
-                <Badge variant="outline" className="bg-white/20 text-white border-white/30">
-                  {urls.filter(u => u.trim()).length}
-                </Badge>
-              </>
-            )}
-          </Button>
-        </div>
+  <Button
+    variant="outline"
+    onClick={addUrlField}
+    disabled={scanning}
+    className="gap-2 border-white/20 bg-transparent text-white/80 hover:text-white hover:bg-white/10"
+  >
+    <Plus className="w-4 h-4" />
+    Add URL
+  </Button>
+  <Button
+    onClick={handleBatchScan}
+    disabled={scanning || urls.filter(u => u.trim()).length === 0}
+    className="flex-1 bg-white text-[#1e293b] hover:bg-white/90 gap-2"
+  >
+    {scanning ? (
+      <>
+        <Loader2 className="w-4 h-4 animate-spin" />
+        Scanning {urls.filter(u => u.trim()).length} URLs...
+      </>
+    ) : (
+      <>
+        Start Batch Scan
+        <Badge variant="outline" className="bg-[#1e293b]/10 text-[#1e293b] border-[#1e293b]/20">
+          {urls.filter(u => u.trim()).length}
+        </Badge>
+      </>
+    )}
+  </Button>
+</div>
 
         {scanning && (
           <div className="space-y-2">
-            <Progress value={progress} className="h-2" />
-            <p className="text-sm text-[#64748b] text-center">
+            <Progress value={progress} className="h-2 bg-white/20" />
+            <p className="text-sm text-white/50 text-center">
               Scanning... This may take a few minutes
             </p>
           </div>
@@ -168,23 +168,23 @@ export function BatchScanner() {
 
         {results.length > 0 && (
           <div className="mt-4 space-y-3">
-            <h4 className="font-medium">Results:</h4>
+            <h4 className="font-medium text-white">Results:</h4>
             {results.map((result, index) => (
               <div
                 key={index}
-                className="p-3 rounded-lg border border-[#e2e8f0] dark:border-[#334155] flex items-center justify-between hover:bg-[#f8fafc] dark:hover:bg-[#1e293b] cursor-pointer transition-colors"
+                className="p-3 rounded-lg border border-white/20 bg-white/5 flex items-center justify-between hover:bg-white/10 cursor-pointer transition-colors"
                 onClick={() => result.id && setLocation(`/audit/${result.id}`)}
               >
                 <div className="flex items-center gap-3">
-                  <Badge className={result.error ? "bg-red-500" : result.score >= 90 ? "bg-green-500" : result.score >= 70 ? "bg-blue-500" : result.score >= 50 ? "bg-yellow-500" : "bg-red-500"}>
+                  <Badge className={result.error ? "bg-red-500/80" : result.score >= 90 ? "bg-emerald-500/80" : result.score >= 70 ? "bg-blue-500/80" : result.score >= 50 ? "bg-yellow-500/80" : "bg-red-500/80"}>
                     {result.error ? '❌' : result.score}
                   </Badge>
-                  <span className="text-sm truncate max-w-[200px]">{result.url}</span>
+                  <span className="text-sm truncate max-w-[200px] text-white/80">{result.url}</span>
                 </div>
                 {result.error ? (
-                  <span className="text-xs text-red-500">{result.error}</span>
+                  <span className="text-xs text-red-400">{result.error}</span>
                 ) : (
-                  <Button variant="ghost" size="sm" className="text-[#2563eb]">
+                  <Button variant="ghost" size="sm" className="text-white/60 hover:text-white">
                     View Report
                   </Button>
                 )}
@@ -193,24 +193,24 @@ export function BatchScanner() {
 
             {/* Comparison Summary */}
             {results.length > 1 && (
-              <div className="mt-4 p-3 bg-gradient-to-r from-[#2563eb]/10 to-[#7c3aed]/10 rounded-lg">
-                <p className="text-sm font-medium">Comparison:</p>
+              <div className="mt-4 p-3 bg-white/10 rounded-lg border border-white/20">
+                <p className="text-sm font-medium text-white/80">Comparison:</p>
                 <div className="grid grid-cols-3 gap-2 mt-2 text-xs">
                   <div className="text-center">
-                    <p className="text-[#64748b]">Best</p>
-                    <p className="text-green-600 font-bold">
+                    <p className="text-white/50">Best</p>
+                    <p className="text-emerald-400 font-bold">
                       {Math.max(...results.filter(r => !r.error).map(r => r.score || 0))}
                     </p>
                   </div>
                   <div className="text-center">
-                    <p className="text-[#64748b]">Average</p>
-                    <p className="text-blue-600 font-bold">
+                    <p className="text-white/50">Average</p>
+                    <p className="text-blue-400 font-bold">
                       {Math.round(results.filter(r => !r.error).reduce((s, r) => s + (r.score || 0), 0) / results.filter(r => !r.error).length)}
                     </p>
                   </div>
                   <div className="text-center">
-                    <p className="text-[#64748b]">Worst</p>
-                    <p className="text-red-600 font-bold">
+                    <p className="text-white/50">Worst</p>
+                    <p className="text-red-400 font-bold">
                       {Math.min(...results.filter(r => !r.error).map(r => r.score || 0))}
                     </p>
                   </div>
