@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import fs from 'fs';
 import path from 'path';
+import { corsMiddleware } from '../../lib/cors';
 
 const DATA_FILE = path.join(process.cwd(), 'audits.json');
 
@@ -17,25 +18,18 @@ function readAudits(): any[] {
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  // ✅ CORS headers
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  corsMiddleware(req, res, async () => {
+    if (req.method !== 'GET') {
+      res.status(405).json({ error: 'Method not allowed' });
+      return;
+    }
 
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
-
-  if (req.method !== 'GET') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
-  try {
-    const audits = readAudits();
-    return res.status(200).json(audits);
-  } catch (error: any) {
-    console.error('❌ Error fetching history:', error);
-    return res.status(500).json({ error: error.message || 'Failed to fetch history' });
-  }
+    try {
+      const audits = readAudits();
+      res.status(200).json(audits);
+    } catch (error: any) {
+      console.error('❌ Error fetching history:', error);
+      res.status(500).json({ error: error.message || 'Failed to fetch history' });
+    }
+  });
 }

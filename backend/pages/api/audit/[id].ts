@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import fs from 'fs';
 import path from 'path';
+import { corsMiddleware } from '../../lib/cors';
 
 const DATA_FILE = path.join(process.cwd(), 'audits.json');
 
@@ -17,34 +18,28 @@ function readAudits(): any[] {
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  // ✅ Complete CORS headers
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
-
-  if (req.method !== 'GET') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
-  try {
-    const { id } = req.query;
-    console.log('🔍 Fetching audit with ID:', id);
-    
-    const audits = readAudits();
-    const audit = audits.find((a: any) => a.id === id);
-
-    if (!audit) {
-      return res.status(404).json({ error: 'Audit not found' });
+  corsMiddleware(req, res, async () => {
+    if (req.method !== 'GET') {
+      res.status(405).json({ error: 'Method not allowed' });
+      return;
     }
 
-    return res.status(200).json(audit);
-  } catch (error: any) {
-    console.error('❌ Error fetching audit:', error);
-    return res.status(500).json({ error: error.message || 'Failed to fetch audit' });
-  }
+    try {
+      const { id } = req.query;
+      console.log('🔍 Fetching audit with ID:', id);
+      
+      const audits = readAudits();
+      const audit = audits.find((a: any) => a.id === id);
+
+      if (!audit) {
+        res.status(404).json({ error: 'Audit not found' });
+        return;
+      }
+
+      res.status(200).json(audit);
+    } catch (error: any) {
+      console.error('❌ Error fetching audit:', error);
+      res.status(500).json({ error: error.message || 'Failed to fetch audit' });
+    }
+  });
 }

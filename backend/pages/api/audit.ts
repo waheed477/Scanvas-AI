@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { runPuppeteerScan, calculateScore, createSummary } from '../../lib/puppeteer-scanner';
 import fs from 'fs';
 import path from 'path';
+import { corsMiddleware } from '../../lib/cors';
 
 const DATA_FILE = path.join(process.cwd(), 'audits.json');
 
@@ -23,73 +24,75 @@ function saveAudit(audit: any) {
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  // CORS headers
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-
+  // Handle preflight OPTIONS request
   if (req.method === 'OPTIONS') {
+    res.setHeader('Access-Control-Allow-Origin', 'https://scanvas-frontend.vercel.app');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     return res.status(200).end();
   }
 
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
-  try {
-    const { url, standards } = req.body;
-
-    if (!url) {
-      return res.status(400).json({ error: 'URL is required' });
+  corsMiddleware(req, res, async () => {
+    if (req.method !== 'POST') {
+      res.status(405).json({ error: 'Method not allowed' });
+      return;
     }
 
-    let formattedUrl = url;
-    if (!url.startsWith('http')) {
-      formattedUrl = `https://${url}`;
-    }
+    try {
+      const { url, standards } = req.body;
 
-    console.log('🔍 Starting scan for:', formattedUrl);
+      if (!url) {
+        res.status(400).json({ error: 'URL is required' });
+        return;
+      }
 
-    const scanResults = await runPuppeteerScan(formattedUrl, standards || ['wcag2aa']);
+      let formattedUrl = url;
+      if (!url.startsWith('http')) {
+        formattedUrl = `https://${url}`;
+      }
 
-    if (scanResults.error) {
-      const errorAudit = {
+      console.log('🔍 Starting scan for:', formattedUrl);
+
+      const scanResults = await runPuppeteerScan(formattedUrl, standards || ['wcag2aa']);
+
+      if (scanResults.error) {
+        const errorAudit = {
+          id: Date.now().toString(),
+          url: formattedUrl,
+          score: 0,
+          summary: { critical: 0, serious: 0, moderate: 0, minor: 0, total: 0 },
+          error: scanResults.error,
+          standards: standards || ['wcag2aa'],
+          createdAt: new Date().toISOString()
+        };
+        saveAudit(errorAudit);
+        res.status(200).json(errorAudit);
+        return;
+      }
+
+      const violations = scanResults.violations || [];
+      const score = calculateScore(violations);
+      const summary = createSummary(violations);
+
+      const audit = {
         id: Date.now().toString(),
         url: formattedUrl,
-        score: 0,
-        summary: { critical: 0, serious: 0, moderate: 0, minor: 0, total: 0 },
-        error: scanResults.error,
-        standards: standards || ['wcag2aa'],
-        createdAt: new Date().toISOString()
+        score,
+        summary,
+        createdAt: new Date().toISOString(),
+        results: scanResults,
+        standards: standards || ['wcag2aa']
       };
-      saveAudit(errorAudit);
-      return res.status(200).json(errorAudit);
+
+      saveAudit(audit);
+
+      console.log(`✅ Score: ${score}, Violations: ${summary.total}`);
+
+      res.status(201).json(audit);
+
+    } catch (error: any) {
+      console.error('❌ Error creating audit:', error);
+      res.status(500).json({ error: error.message || 'Failed to create audit' });
     }
-
-    const violations = scanResults.violations || [];
-    const score = calculateScore(violations);
-    const summary = createSummary(violations);
-
-    const audit = {
-      id: Date.now().toString(),
-      url: formattedUrl,
-      score,
-      summary,
-      createdAt: new Date().toISOString(),
-      results: scanResults,
-      standards: standards || ['wcag2aa']
-    };
-
-    // ✅ Save to file
-    saveAudit(audit);
-
-    console.log(`✅ Score: ${score}, Violations: ${summary.total}`);
-
-    return res.status(201).json(audit);
-
-  } catch (error: any) {
-    console.error('❌ Error creating audit:', error);
-    return res.status(500).json({ error: error.message || 'Failed to create audit' });
-  }
+  });
 }
