@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import fs from 'fs';
 import path from 'path';
-import { corsMiddleware } from '../../lib/cors';
 
 const DATA_FILE = path.join(process.cwd(), 'audits.json');
 
@@ -18,28 +17,36 @@ function readAudits(): any[] {
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  corsMiddleware(req, res, async () => {
-    if (req.method !== 'GET') {
-      res.status(405).json({ error: 'Method not allowed' });
+  // ✅ CORS headers - MUST BE FIRST
+  res.setHeader('Access-Control-Allow-Origin', 'https://scanvas-frontend.vercel.app');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  // ✅ Handle preflight OPTIONS request
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
+  if (req.method !== 'GET') {
+    res.status(405).json({ error: 'Method not allowed' });
+    return;
+  }
+
+  try {
+    const { id } = req.query;
+    console.log('🔍 Fetching audit with ID:', id);
+    
+    const audits = readAudits();
+    const audit = audits.find((a: any) => a.id === id);
+
+    if (!audit) {
+      res.status(404).json({ error: 'Audit not found' });
       return;
     }
 
-    try {
-      const { id } = req.query;
-      console.log('🔍 Fetching audit with ID:', id);
-      
-      const audits = readAudits();
-      const audit = audits.find((a: any) => a.id === id);
-
-      if (!audit) {
-        res.status(404).json({ error: 'Audit not found' });
-        return;
-      }
-
-      res.status(200).json(audit);
-    } catch (error: any) {
-      console.error('❌ Error fetching audit:', error);
-      res.status(500).json({ error: error.message || 'Failed to fetch audit' });
-    }
-  });
+    res.status(200).json(audit);
+  } catch (error: any) {
+    console.error('❌ Error fetching audit:', error);
+    res.status(500).json({ error: error.message || 'Failed to fetch audit' });
+  }
 }

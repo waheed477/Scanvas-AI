@@ -1,19 +1,19 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
+const allowedOrigin = 'https://scanvas-frontend.vercel.app';
+
 export function corsMiddleware(
-  req: NextApiRequest,
-  res: NextApiResponse,
-  next: () => void
+  handler: (req: NextApiRequest, res: NextApiResponse) => Promise<void>
 ) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://scanvas-frontend.vercel.app');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  
-  if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
-  }
-  
-  next();
+  return async (req: NextApiRequest, res: NextApiResponse) => {
+    res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+    if (req.method === 'OPTIONS') {
+      return res.status(200).end();
+    }
+
+    return handler(req, res);
+  };
 }

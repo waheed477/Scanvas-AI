@@ -2,7 +2,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { runPuppeteerScan, calculateScore, createSummary } from '../../lib/puppeteer-scanner';
 import fs from 'fs';
 import path from 'path';
-import { corsMiddleware } from '../../lib/cors';
 
 const DATA_FILE = path.join(process.cwd(), 'audits.json');
 
@@ -23,7 +22,17 @@ function saveAudit(audit: any) {
   console.log(`💾 Audit saved to file: ${audit.id}`);
 }
 
-export default corsMiddleware(async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  // ✅ CORS headers - MUST BE FIRST
+  res.setHeader('Access-Control-Allow-Origin', 'https://scanvas-frontend.vercel.app');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  // ✅ Handle preflight OPTIONS request
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Method not allowed' });
     return;
@@ -85,5 +94,4 @@ export default corsMiddleware(async (req: NextApiRequest, res: NextApiResponse) 
     console.error('❌ Error creating audit:', error);
     res.status(500).json({ error: error.message || 'Failed to create audit' });
   }
-});
-
+}
