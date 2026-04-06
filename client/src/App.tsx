@@ -3,7 +3,6 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { SessionProvider } from "next-auth/react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Home from "@/pages/Home";
@@ -33,26 +32,24 @@ function Router() {
 
 function App() {
   return (
-    <SessionProvider basePath="/api/auth">
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <div className="min-h-screen bg-gradient-to-br from-[#0a0f16] via-[#0f172a] to-[#1a1f2e] relative">
-            {/* Background Orbs - Subtle Dark */}
-            <div className="fixed inset-0 pointer-events-none">
-              <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
-              <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
-            </div>
-            <Navbar />
-            <main className="relative z-10">
-              <Router />
-            </main>
-            <Footer />
-            <Toaster />
-            <CookieConsent />
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <div className="min-h-screen bg-gradient-to-br from-[#0a0f16] via-[#0f172a] to-[#1a1f2e] relative flex flex-col">
+          {/* Background Orbs - Subtle Dark */}
+          <div className="fixed inset-0 pointer-events-none">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
           </div>
-        </TooltipProvider>
-      </QueryClientProvider>
-    </SessionProvider>
+          <Navbar />
+          <main className="relative z-10 flex-grow">
+            <Router />
+          </main>
+          <Footer />
+          <Toaster />
+          <CookieConsent />
+        </div>
+      </TooltipProvider>
+    </QueryClientProvider>
   );
 }
 

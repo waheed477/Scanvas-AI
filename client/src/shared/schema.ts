@@ -2,12 +2,15 @@ import { z } from "zod";
 
 // Audit type for frontend
 export interface Audit {
-  id: number;
+  id?: string;
+  _id?: string;
   url: string;
   score: number;
-  results: AuditResult;
+  results?: AuditResult;
   summary: AuditSummary;
   createdAt: string;
+  error?: string;
+  standards?: string[];
 }
 
 // Insert audit schema (for API requests)
@@ -42,4 +45,21 @@ export interface AuditSummary {
   moderate: number;
   minor: number;
   total: number;
+}
+
+// User type (for future auth)
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  image?: string;
+  createdAt: string;
+}
+
+// Shared API response types
+export interface ApiResponse<T = any> {
+  success: boolean;
+  data?: T;
+  error?: string;
+  message?: string;
 }

@@ -3,12 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, Eye } from "lucide-react";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function Navbar() {
   const [location] = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { data: session, status } = useSession();
 
   const navItems = [
     { name: "Audit", path: "/audit" }, 
@@ -70,31 +68,14 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Auth Buttons */}
+          {/* Sign In Button - Simple Link */}
           <div className="hidden md:flex items-center gap-2">
-            {status === "loading" ? (
-              <div className="w-20 h-9 animate-pulse bg-white/10 rounded-full" />
-            ) : session ? (
-              <>
-                <span className="text-sm text-white/70">
-                  {session.user?.email?.split('@')[0]}
-                </span>
-                <Button
-                  variant="outline"
-                  onClick={() => signOut()}
-                  className="rounded-full border-white/20 text-white/80 hover:bg-white/10 hover:text-white"
-                >
-                  Sign Out
-                </Button>
-              </>
-            ) : (
-              <Button
-                onClick={() => signIn('google', { callbackUrl: 'http://localhost:3000' })}
-                className="rounded-full bg-white text-[#1e293b] hover:bg-white/90 shadow-lg"
-              >
-                Sign In
-              </Button>
-            )}
+            <Button
+              onClick={() => window.location.href = '/auth/signin'}
+              className="rounded-full bg-white text-[#1e293b] hover:bg-white/90 shadow-lg"
+            >
+              Sign In
+            </Button>
           </div>
 
           {/* Mobile menu button */}
@@ -136,25 +117,14 @@ export default function Navbar() {
               </Link>
             ))}
             
-            {/* Mobile auth buttons */}
+            {/* Mobile Sign In Button */}
             <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-white/10">
-              {status === "loading" ? (
-                <div className="w-full h-9 animate-pulse bg-white/10 rounded-full" />
-              ) : session ? (
-                <>
-                  <p className="text-sm text-white/60 px-2">Signed in as {session.user?.email}</p>
-                  <Button variant="outline" onClick={() => signOut()} className="w-full border-white/20 text-white/80 hover:bg-white/10">
-                    Sign Out
-                  </Button>
-                </>
-              ) : (
-                <Button
-                  onClick={() => signIn('google', { callbackUrl: 'http://localhost:3000' })}
-                  className="w-full bg-white text-[#1e293b] hover:bg-white/90"
-                >
-                  Sign In
-                </Button>
-              )}
+              <Button
+                onClick={() => window.location.href = '/auth/signin'}
+                className="w-full bg-white text-[#1e293b] hover:bg-white/90"
+              >
+                Sign In
+              </Button>
             </div>
           </motion.div>
         )}

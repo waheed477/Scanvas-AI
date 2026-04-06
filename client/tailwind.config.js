@@ -1,24 +1,16 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
     extend: {
       colors: {
-        background: '#f8fafc',
-        foreground: '#0f172a',
-        primary: {
-          DEFAULT: '#2563eb',
-          foreground: '#ffffff',
-        },
-        muted: {
-          DEFAULT: '#e2e8f0',
-          foreground: '#64748b',
-        },
-        card: {
-          DEFAULT: '#ffffff',
-          foreground: '#0f172a',
-        },
-        border: '#e2e8f0',
+        background: '#0a0f16',
+        foreground: '#ffffff',
+        primary: '#3b82f6',
+        secondary: '#64748b',
       },
     },
   },
