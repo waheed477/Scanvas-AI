@@ -12,6 +12,9 @@ export default {
         primary: '#3b82f6',
         secondary: '#64748b',
       },
+      fontFamily: {
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+      },
     },
   },
   plugins: [],
