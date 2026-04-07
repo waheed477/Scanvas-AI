@@ -4,7 +4,7 @@ import path from 'path'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/',
+  base: './',  // ✅ Critical for Netlify
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -13,15 +13,12 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    sourcemap: false,
+    assetsDir: 'assets',
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom', 'framer-motion'],
-          ui: ['lucide-react', '@radix-ui/react-dialog']
-        }
-      }
-    }
+        manualChunks: undefined,
+      },
+    },
   },
   server: {
     port: 3000,
