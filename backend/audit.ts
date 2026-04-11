@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { runPuppeteerScan, calculateScore, createSummary } from '../../lib/puppeteer-scanner';
+import { runPuppeteerScan, calculateScore, createSummary } from '../lib/puppeteer-scanner';
 import fs from 'fs';
 import path from 'path';
 
