@@ -2,7 +2,7 @@ import { QueryClient, QueryFunction } from "@tanstack/react-query";
 
 // Backend URL - change this based on environment
 const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://your-backend.vercel.app'  // Production URL (change this)
+  ? 'https://model66-scanvas-api.hf.space'  // Production URL (HF Space)
   : 'http://localhost:3001';             // Development URL (Next.js backend)
 
 async function throwIfResNotOk(res: Response) {
@@ -24,7 +24,7 @@ export async function apiRequest(
     method,
     headers: data ? { "Content-Type": "application/json" } : {},
     body: data ? JSON.stringify(data) : undefined,
-    credentials: "omit", // Changed from "include" since we're not using auth
+    credentials: "omit",
   });
 
   await throwIfResNotOk(res);
@@ -41,7 +41,7 @@ export const getQueryFn: <T>(options: {
     const fullUrl = url.startsWith('http') ? url : `${API_BASE_URL}${url}`;
     
     const res = await fetch(fullUrl, {
-      credentials: "omit", // Changed from "include"
+      credentials: "omit",
     });
 
     if (unauthorizedBehavior === "returnNull" && res.status === 401) {
