@@ -1,9 +1,7 @@
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
 
-// Backend URL - change this based on environment
-const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://model66-scanvas-api.hf.space'  // Production URL (HF Space)
-  : 'http://localhost:3001';             // Development URL (Next.js backend)
+// ✅ Vite ke liye sahi tareeka - import.meta.env use karo
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 async function throwIfResNotOk(res: Response) {
   if (!res.ok) {
@@ -17,7 +15,6 @@ export async function apiRequest(
   url: string,
   data?: unknown | undefined,
 ): Promise<Response> {
-  // Add API_BASE_URL to the request
   const fullUrl = url.startsWith('http') ? url : `${API_BASE_URL}${url}`;
   
   const res = await fetch(fullUrl, {
