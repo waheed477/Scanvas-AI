@@ -1,4 +1,4 @@
-// Simple session management using localStorage
+// session management
 const SESSION_KEY = 'scanvas_user_id';
 
 export function getUserId(): string {
