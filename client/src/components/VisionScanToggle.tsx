@@ -46,10 +46,13 @@ export function VisionScanToggle({ url, onScanComplete }: VisionScanToggleProps)
   const [isOpen, setIsOpen] = useState(false);
   const { toast } = useToast();
 
+  // ✅ Updated to use environment variable
+  const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+
   const runVisionScan = async () => {
     setScanning(true);
     try {
-      const response = await fetch('http://localhost:3001/api/vision-scan', {
+      const response = await fetch(`${API_BASE_URL}/api/vision-scan`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url, mode: selectedModel })

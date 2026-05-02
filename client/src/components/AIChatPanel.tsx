@@ -26,7 +26,8 @@ export function AIChatPanel({ isOpen, onClose, initialIssue }: AIChatPanelProps)
   const { toast } = useToast();
   const isMobile = useMediaQuery("(max-width: 768px)");
   
-  const API_BASE_URL = "http://localhost:3001";
+  // ✅ Updated to use environment variable
+  const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
